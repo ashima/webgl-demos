@@ -1,0 +1,6 @@
+[submodule "pano/engine"]
+	path = pano/engine
+	url = git://github.com/ashima/webgl-engine.git
+[submodule "pano/demo-lib"]
+	path = pano/demo-lib
+	url = git://github.com/ashima/demo-lib.git

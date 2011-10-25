@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes" ?>
+<manifest>
+  <link rel="prefetch" type="image/png" href="img/zoom_more.png"
+	data-src="http://www.ashimagroup.net/~sheets/pano/assets/zoom_more.png" />
+  <link rel="prefetch" type="image/png" href="img/zoom_less.png"
+	data-src="http://www.ashimagroup.net/~sheets/pano/assets/zoom_less.png" />
+  <link rel="stylesheet" type="text/css" href="pano.css" />
+  <link rel="tag" type="text/javascript" href="engine/awe0.js" />
+  <link rel="tag" type="text/javascript" href="pano.js" />
+  <link rel="manifest" type="text/xml" href="demo-lib/manifest.xml" />
+</manifest>

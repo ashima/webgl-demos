@@ -1,0 +1,143 @@
+<html>
+<head>
+<title>Multiple Panorama Viewer</title>
+<link rel="stylesheet" type="text/css" href="pano.css" />
+</head>
+<body onload="main()" >
+<article id="pano-container">
+<div class="isResizable" id="panodiv" width="200" height="200"></div>
+<nav class="pano">
+<ul id="zoom">
+<li id="bZoomIn" class="zoomin"></li>
+<li id="bZoomOut" class="zoomout"></li>
+</ul>
+<div id="navimg">
+<span id="thumbs"></span>
+</div>
+<div id="switchmsg">Switching...</div>
+</nav>
+
+<script type="text/javascript" src="engine/awe0.js"></script>
+<script type="text/javascript" src="pano.js"></script>
+
+<script type="text/javascript">
+<!--
+var apv = new ashimaPanoViewer();
+
+var addEvent = (document.addEventListener)
+  ? function (e, v, f, c) { e.addEventListener(v,f,c); }
+  : function (e, v, f)    { e.attachEvent("on"+v,f); }
+
+function switchpan(e) {
+  if (d = document.getElementById(e) )
+    apv.setImage(d);
+  }
+
+var imgs = [ 
+  { file: "MER.jpg",  desc: "MER" },
+  { file: "MER2.jpg", desc: "MER" },
+  { file: "MER3.jpg", desc: "MER" },
+  { file: "MER4.jpg", desc: "MER" },
+  { file: "MER5.jpg", desc: "MER" },
+  { file: "MPF.jpg",  desc: "MPF" },
+  { file: "PHX.jpg",  desc: "PHX" }
+  ];
+
+gif1x1 = "data:image/gif;base64,R0lGODlhAQABAJEAAP/Mmf/Mmf4BAgAAACH5BAQUAP8ALAAAAAABAAEAAAICRAEAOw==";
+
+var curI = 0;
+var zoomDelta = (1-1/16);
+var zoom = 1.0;
+
+function tryZoom(z) { 
+  if (z < 1.9) { apv.setZoom(z); return z; }
+  else return zoom;
+  }
+function zoomIn()  { zoom = tryZoom( zoom * zoomDelta) }
+function zoomOut() { zoom = tryZoom( zoom / zoomDelta) }
+
+function switchImage(i) {
+  for (var j = 0; j < imgs.length; ++j)
+    imgs[j].thumb.className = "thumbInAct";
+  imgs[i].thumb.className = "thumbAct";
+
+  zoom = 1.0;
+
+  apv.setImage(imgs[i].img);
+  }
+
+function loadNext() {
+  function addClick(e,j) {
+    addEvent( e, "click", function() { switchImage(j);}, false);
+    }
+
+  var e;
+
+  if (curI == 1)
+    switchImage(0);
+
+  if (curI > 0) {
+    e = imgs[curI-1];
+    e.thumb.src = "panos/t_" + e.file;
+    addClick(e.thumb, curI-1);
+    //thumb.className += "thumb";
+    e.img.parentNode.replaceChild(e.thumb, e.img);
+    }
+ 
+  var e = imgs[curI++];
+
+  if (curI <= imgs.length) {
+    e.img.onload  = loadNext;
+    e.img.onerror = loadNext;
+    e.img.src = "panos/" + e.file;
+    }
+  }
+
+function main() {
+  var d,e,f, img;
+  apv.init( document.getElementById("panodiv") );
+
+  d = document.getElementById("thumbs");
+  for (var i=0;i<imgs.length;++i) {
+    imgs[i].img = img = new Image ;
+    imgs[i].thumb = new Image;
+    //img.className += "thumb";
+    img.src=gif1x1;
+
+    e = document.createTextNode( imgs[i].desc );
+
+    f = document.createElement("div");
+    f.className += "thumb";
+
+    f.appendChild(img);
+    f.appendChild(e);
+
+    d.appendChild(f);
+    
+    } 
+  loadNext();
+
+
+  function zoomButton(e,f,dt)
+    {
+    var t = 0;
+    function clear() {
+      if (t) {
+        clearTimeout(t); t = 0;
+        }
+      }
+    addEvent( e, "mousedown", function() { t = setInterval(f,dt); f(); }, false);
+    addEvent( e, "mouseup", clear, false);
+    addEvent( e, "mouseout", clear, false);
+    addEvent( e, "mouseleave", clear, false);
+    addEvent( e, "blur", clear, false);
+    }
+
+  zoomButton( document.getElementById("bZoomIn"), zoomIn, 33 ) ;
+  zoomButton( document.getElementById("bZoomOut"), zoomOut, 33 ) ;
+  }
+//-->
+</script>
+</article>
+</body>
+</html>

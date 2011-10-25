@@ -1,0 +1,114 @@
+/*
+*************************************
+  WebGL Panorama
+  Created: 26 sep 2011    
+  Updated: 11 oct 2011
+*************************************
+*/
+
+
+body {
+    font:12px/18px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", helvetica, arial, verdana, sans-serif;
+    color:#000;
+    margin:0;
+    padding:0;
+}	
+
+#pano-container {
+    height:100%;
+    width:100%;
+    margin:auto;
+    display: -moz-box;  
+    display: -webkit-box;  
+    display: box;
+}
+	
+nav.pano {
+    background-color:#fff;
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#bbb));
+    background:-moz-linear-gradient(0% 0% 270deg,#FFFFFF, #bbb);
+    background: -webkit-linear-gradient(#fff, #bbb);
+    width:172px;
+    height:100%;
+    border-left:1px solid #aaa;
+    overflow:scroll;
+}
+
+ul	{
+		list-style:none;
+		}
+	
+.isResizable {
+		display:block;  
+		-moz-box-flex: 1;  
+		-webkit-box-flex: 1;  
+		box-flex: 1;
+		clear:both;
+		background: rgba(0, 0, 0, 0.0); 
+		overflow: scroll;
+		resize: both;
+		padding:0;
+		margin:0;
+		height:100%;
+		width:100%;
+		}
+  
+#zoom	{
+		width:93px;
+		height:34px;
+		padding-top:15px;
+		padding-left:34px;
+		}
+ 	
+.zoomin, .zoomout	{
+		width:39px;
+		height:34px;
+		float:left;
+		position:block;
+		cursor:pointer;
+		}
+	
+.zoomin  {
+		background:url("img/zoom_more.png") no-repeat scroll top right transparent;		
+		margin-right:15px;
+		}
+
+.zoomout	{
+		background:url("img/zoom_less.png") no-repeat scroll top right transparent;
+		}
+	
+div#navimg	{
+		margin:0 auto;
+		padding-top:15px;
+		width:82px;
+		}
+		
+#switchmsg	{
+		display:none;
+		}
+
+.thumb {
+		color: #000;
+		border:1px solid #999;
+		text-align:center;
+		margin-bottom:10px;
+		}
+
+.thumb img {
+	  min-width: 80;
+	  min-height: 40;
+	  max-width: 80;
+	  max-height: 40;
+	  width: 80;
+	  height: 40;
+	  margin-bottom:2px;
+	  cursor:pointer;
+	  }
+
+.thumbInAct {
+	  opacity:0.6;
+	  }
+
+.thumbAct, .thumb img:hover  {
+	  opacity:1.0;
+	  }
