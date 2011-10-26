@@ -6,4 +6,4 @@ which can be found in the LICENSE file.
 
 ## Demos
 
-- [Multiple Panorama Viewer](tree/master/pano)
+- [Multiple Panorama Viewer](https://github.com/ashima/webgl-demos/tree/master/pano)
