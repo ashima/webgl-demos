@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="yes" ?>
+<manifest>
+  <link rel="prefetch" type="image/jpeg" href="panos/apollo11.jpg"
+	title="Apollo 11" name="apollo11" data-type="pano"
+	data-thumb="panos/t_apollo11.jpg"
+	data-src="http://www.ashimagroup.net/~mir/panorama/apollo11.jpg" />
+  <link rel="prefetch" type="image/jpeg" href="panos/t_apollo11.jpg"
+	data-src="http://www.ashimagroup.net/~mir/panorama/t_apollo11.jpg" />
+
+  <link rel="manifest" type="text/xml" href="../manifest.xml" />
+  <link rel="start" type="text/html" href="../pano.html" />
+</manifest>
