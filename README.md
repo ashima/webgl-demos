@@ -6,7 +6,9 @@ which can be found in the LICENSE file.
 
 ## Usage
 
-Don't forget to ```sh git submodule update --init --recursive``` to clone dependencies!
+Don't forget to
+```git submodule update --init --recursive```
+to clone dependencies!
 
 ## Demos
 
