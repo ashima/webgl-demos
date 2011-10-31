@@ -180,7 +180,14 @@ function main() {
     zoomButton( document.getElementById("bZoomOut"), zoomOut, 33 ) ;
 
     run_main = true;
+  } else {
+    apv.updateElems();
+    //apv.animator.play();
   }
+}
+
+function pause() {
+  //apv.animator.pause();
 }
 //-->
 </script>
