@@ -137,49 +137,51 @@ function loadNext() {
     }
   }
 
+var run_main = false;
 function main() {
-  var d,e,f, img;
-  apv.init( document.getElementById("panodiv") );
+  if (!run_main) {
+    var d,e,f, img;
+    apv.init( document.getElementById("panodiv") );
 
-  d = document.getElementById("thumbs");
-  for (var i=0;i<panos.length;++i) {
-    panos[i].img = img = new Image ;
-    panos[i].thumb = new Image;
-    //img.className += "thumb";
-    img.src=gif1x1;
+    d = document.getElementById("thumbs");
+    for (var i=0;i<panos.length;++i) {
+      panos[i].img = img = new Image ;
+      panos[i].thumb = new Image;
+      //img.className += "thumb";
+      img.src=gif1x1;
 
-    e = document.createTextNode( panos[i].title );
+      e = document.createTextNode( panos[i].title );
 
-    f = document.createElement("div");
-    f.className += "thumb";
+      f = document.createElement("div");
+      f.className += "thumb";
+      
+      f.appendChild(img);
+      f.appendChild(e);
 
-    f.appendChild(img);
-    f.appendChild(e);
+      d.appendChild(f);
+    }
+    loadNext();
 
-    d.appendChild(f);
-    
-    } 
-  loadNext();
-
-
-  function zoomButton(e,f,dt)
-    {
-    var t = 0;
-    function clear() {
-      if (t) {
-        clearTimeout(t); t = 0;
+    function zoomButton(e,f,dt) {
+      var t = 0;
+      function clear() {
+        if (t) {
+          clearTimeout(t); t = 0;
         }
       }
-    addEvent( e, "mousedown", function() { t = setInterval(f,dt); f(); }, false);
-    addEvent( e, "mouseup", clear, false);
-    addEvent( e, "mouseout", clear, false);
-    addEvent( e, "mouseleave", clear, false);
-    addEvent( e, "blur", clear, false);
+      addEvent( e, "mousedown", function() { t = setInterval(f,dt); f(); }, false);
+      addEvent( e, "mouseup", clear, false);
+      addEvent( e, "mouseout", clear, false);
+      addEvent( e, "mouseleave", clear, false);
+      addEvent( e, "blur", clear, false);
     }
 
-  zoomButton( document.getElementById("bZoomIn"), zoomIn, 33 ) ;
-  zoomButton( document.getElementById("bZoomOut"), zoomOut, 33 ) ;
+    zoomButton( document.getElementById("bZoomIn"), zoomIn, 33 ) ;
+    zoomButton( document.getElementById("bZoomOut"), zoomOut, 33 ) ;
+
+    run_main = true;
   }
+}
 //-->
 </script>
 </article>
