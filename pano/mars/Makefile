@@ -12,4 +12,4 @@ static: static-manifest.xml
 	xsltproc ../demo-lib/static-assets.xsl static-manifest.xml | uniq | sh
 
 clean:
-	rm static-manifest.xml index.html
+	rm -f static-manifest.xml index.html
