@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>WebGL Gloc Demos.</title>
+    <style type="text/css">
+      .demowindow {
+  padding:0;
+  margin:0;
+  height:100%;
+  width:100%;
+
+      body {
+        margin:0;
+        padding:0;
+        }
+    </style>
+  </head>
+  <body onLoad="main()" >
+    <div id="loading" >
+      Loading ...
+    </div>
+
+    <div class="demowindow" id="demodiv" />
+
+    <script type="text/javascript" src="engine/awe0.js"></script>
+    <script type="text/javascript" src="demo.js"></script>
+
+    <script type="text/javascript">
+      agd = new ashimaGlocDemo;
+ 
+      function main() {
+        gddiv = document.getElementById("demodiv");
+        agd.init(gddiv);
+        agd.animator.play();
+        }
+    </script>
+  </body>
+</html>
