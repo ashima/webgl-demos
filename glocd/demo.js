@@ -65,7 +65,7 @@ function ashimaGlocDemo() {
   varying vec2 texCoord;                    \
 \
   void main(void) {                       \
-    map2Rto3P(); \
+    map2Rto3Ps(); \
     texCoord = position2D; \
     normal = N;\
    \
@@ -78,9 +78,16 @@ function ashimaGlocDemo() {
   uniform sampler2D tex0; \
   varying vec2 texCoord; \
   varying vec4 normal; \
-  void main(void) { \
-    /*gl_FragColor = texture2D(tex0, tRxy );*/ \
+void textureMain() {\
+    gl_FragColor = texture2D(tex0, texCoord ); \
+    /*gl_FragColor.w = 1.0;*/\
+} \
+void gradedMain() { \
     gl_FragColor = vec4(abs(texCoord), 1.0,1.0 ); \
+} \
+  void main(void) { \
+    textureMain(); \
+    /*gradedMain();*/\
     }";
   
     prog = awe.compileAndLink(vs, fs);
@@ -110,14 +117,17 @@ function ashimaGlocDemo() {
 
     }
 
-
+var demoTex, demoImg;
   function renderinit()
     {
     demoTex = awe.textureCreate();
-    demoTex.aweParams( gl.LINEAR, gl.LINEAR, gl.REPEAT, gl.CLAMP_TO_EDGE, false);
-    gl.disable(gl.DEPTH_TEST);
-    gl.disable(gl.BLEND);
-  
+    demoImg = new Image ;
+    demoImg.onload = function() {
+      demoTex.aweFromElem(demoImg);
+      demoTex.aweParams( gl.LINEAR, gl.LINEAR, gl.REPEAT, gl.REPEAT, false);
+      }
+    demoImg.src = "Stone1.jpg";
+    
     prog.aweUse();
     demoTex.aweSet(0, prog.aweSym['tex0'] );
     verts.aweSetVertexAttPtr(prog.aweSym["position2D"]);
@@ -153,7 +163,8 @@ function ashimaGlocDemo() {
   function render() {
     var w = elemRoot.clientWidth;
     var h = elemRoot.clientHeight;
-    phi += pi / 90;  
+    phi += pi / 240;  
+
     if (w != curW || h != curH) {
       D.animator.pause();
       setTimeout(resizeNow,200);
