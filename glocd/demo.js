@@ -63,31 +63,45 @@ function ashimaGlocDemo() {
 \
   varying vec4 normal; \
   varying vec2 texCoord;                    \
+  varying vec4 position4; \
 \
   void main(void) {                       \
     map2Rto3Ps(); \
     texCoord = position2D; \
-    normal = N;\
+    normal = N*mvMatrix;\
    \
-    gl_Position = pMatrix *  (P*mvMatrix  - vec4(0.,0.,4,0.));  \
-    /*gl_Position = vec4(Rxy, 1.0,1.0);*/\
+    position4 = P*mvMatrix  - vec4(0.,0.,4,0.); \
+    gl_Position = pMatrix * position4;\
     }";
 
     var fs = "#ifdef GL_ES\nprecision highp float;\n#endif\n\
   const float ipi = 1.0 / 3.1415926535897932384626433832795029 ; \
   uniform sampler2D tex0; \
   varying vec2 texCoord; \
+  varying vec4 position4; \
+\
+  void lightingNull() {\
+  }\
+\
   varying vec4 normal; \
-void textureMain() {\
+  uniform vec4 ambientColor ;\
+  uniform vec4 directionalColor ;\
+  uniform vec4 lightingDirection ;\
+  void lightingSimple() {\
+    gl_FragColor *= \
+      ambientColor + directionalColor * max(dot(normal, lightingDirection),0.);\
+  }\
+  void textureMain() {\
     gl_FragColor = texture2D(tex0, texCoord ); \
     /*gl_FragColor.w = 1.0;*/\
-} \
-void gradedMain() { \
+  } \
+  void gradedMain() { \
     gl_FragColor = vec4(abs(texCoord), 1.0,1.0 ); \
-} \
+  } \
   void main(void) { \
     textureMain(); \
     /*gradedMain();*/\
+    lightingSimple();\
     }";
   
     prog = awe.compileAndLink(vs, fs);
@@ -175,11 +189,6 @@ var demoTex, demoImg;
       ct = Math.cos(theta); st = Math.sin(theta);
       cp = Math.cos(phi);   sp = Math.sin(phi);
 
-      /*mvMatrix = new Float32Array( [
-      ct*cp, -sp, st*cp, 0,
-      ct*sp,  cp, st*sp, 0,
-      -st,    0,  ct,    0,
-      0,      0,  0,     1.0 ] );*/
       mvMatrix = new Float32Array( [
       cp, -sp, 0, 0,
       ct*sp, ct*cp ,-st , 0,
@@ -188,6 +197,10 @@ var demoTex, demoImg;
 
       gl.uniformMatrix4fv(prog.aweSym["pMatrix"], false, pMatrix);
       gl.uniformMatrix4fv(prog.aweSym["mvMatrix"], false, mvMatrix);
+      gl.uniform4fv(prog.aweSym["ambientColor"], [0.1,0.1,0.1,1.0] );
+      gl.uniform4fv(prog.aweSym["directionalColor"], [0.9,0.9,0.9,1.0] );
+      gl.uniform4fv(prog.aweSym["lightingDirection"], [1.0,1.0,1.0,1.0] );
+
       tris.drawElements(gl.TRIANGLES);
       }
     }
