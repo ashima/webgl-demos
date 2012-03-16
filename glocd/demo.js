@@ -199,7 +199,7 @@ var demoTex, demoImg;
       gl.uniformMatrix4fv(prog.aweSym["mvMatrix"], false, mvMatrix);
       gl.uniform4fv(prog.aweSym["ambientColor"], [0.1,0.1,0.1,1.0] );
       gl.uniform4fv(prog.aweSym["directionalColor"], [0.9,0.9,0.9,1.0] );
-      gl.uniform4fv(prog.aweSym["lightingDirection"], [1.0,1.0,1.0,1.0] );
+      gl.uniform4fv(prog.aweSym["lightingDirection"], [ sp*cp+cp*sp,1.0, cp*cp-sp*sp, 1.0] );
 
       tris.drawElements(gl.TRIANGLES);
       }
