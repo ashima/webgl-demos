@@ -55,15 +55,17 @@ function ashimaGlocDemo() {
   void map2Rto3Ps() { /* sphere */ \
     vec2 v = position2D * pi; \
     P = vec4(cos(v.x)*sin(v.y), sin(v.x)*sin(v.y), cos(v.y), 1.0);\
-    N = P;\
+    N = normalize(P);\
     }                                  \
 \
   uniform mat4 pMatrix; \
   uniform mat4 mvMatrix;\
+  uniform vec4 pointLightingLocation;\
 \
   varying vec4 normal; \
   varying vec2 texCoord;                    \
   varying vec4 position4; \
+  varying vec4 pointLightingDirection;\
 \
   void main(void) {                       \
     map2Rto3Ps(); \
@@ -71,6 +73,9 @@ function ashimaGlocDemo() {
     normal = N*mvMatrix;\
    \
     position4 = P*mvMatrix  - vec4(0.,0.,4,0.); \
+    position4 /= position4.w ; \
+    pointLightingDirection =  vec4(\
+      normalize( pointLightingLocation.xyz - position4.xyz ), 0. ); \
     gl_Position = pMatrix * position4;\
     }";
 
@@ -79,21 +84,31 @@ function ashimaGlocDemo() {
   uniform sampler2D tex0; \
   varying vec2 texCoord; \
   varying vec4 position4; \
+  vec4 light = vec4(0.); \
 \
   void lightingNull() {\
+    light = vec4(1.0);\
+  }\
+\
+  uniform vec4 ambientColor ;\
+  void lightingAmbient() {\
+    light += ambientColor;\
   }\
 \
   varying vec4 normal; \
-  uniform vec4 ambientColor ;\
   uniform vec4 directionalColor ;\
   uniform vec4 lightingDirection ;\
-  void lightingSimple() {\
-    gl_FragColor *= \
-      ambientColor + directionalColor * max(dot(normal, lightingDirection),0.);\
+  void lightingDiffuse() {\
+    light += directionalColor * max(dot(normal, lightingDirection),0.);\
+  }\
+\
+  uniform vec4 pointLightingColor ;\
+  varying vec4 pointLightingDirection;\
+  void lightingPoint() {\
+    light += pointLightingColor * max(dot(normal, pointLightingDirection),0.);\
   }\
   void textureMain() {\
     gl_FragColor = texture2D(tex0, texCoord ); \
-    /*gl_FragColor.w = 1.0;*/\
   } \
   void gradedMain() { \
     gl_FragColor = vec4(abs(texCoord), 1.0,1.0 ); \
@@ -101,7 +116,10 @@ function ashimaGlocDemo() {
   void main(void) { \
     textureMain(); \
     /*gradedMain();*/\
-    lightingSimple();\
+    lightingAmbient();\
+    lightingDiffuse();\
+    /*lightingPoint();*/\
+    gl_FragColor *= light;\
     }";
   
     prog = awe.compileAndLink(vs, fs);
@@ -200,6 +218,8 @@ var demoTex, demoImg;
       gl.uniform4fv(prog.aweSym["ambientColor"], [0.1,0.1,0.1,1.0] );
       gl.uniform4fv(prog.aweSym["directionalColor"], [0.9,0.9,0.9,1.0] );
       gl.uniform4fv(prog.aweSym["lightingDirection"], [ sp*cp+cp*sp,1.0, cp*cp-sp*sp, 1.0] );
+      gl.uniform4fv(prog.aweSym["pointLightingColor"], [0.9,0.9,0.9,1.0] );
+      gl.uniform4fv(prog.aweSym["pointLightingLocation"], [10.0,10.0,10,1.0] );
 
       tris.drawElements(gl.TRIANGLES);
       }
