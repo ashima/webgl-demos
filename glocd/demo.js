@@ -14,7 +14,8 @@ function ashimaGlocDemo() {
   var elemDemo, elemRoot, elemCanvas;
   var curW , curH ;
   //var mvMatrix, pMatrix;
-
+  theta = 0.;
+  phi = 0.;
   function makePerspective(fovy, aspect, near, far)
     { // swipped from somewhere!
     var tp = near * Math.tan(fovy * Math.PI / 360.0);
@@ -29,11 +30,6 @@ function ashimaGlocDemo() {
     var C = -(far+near)/(far-near);
     var D = -2*far*near/(far-near);
   
-    /*return [X, 0, A, 0,
-            0, Y, B, 0,
-            0, 0, C, D,
-            0, 0,-1, 0 ] ;*/
-
     return [X, 0, 0, 0,
             0, Y, 0, 0,
             A, B, C, -1,
@@ -48,38 +44,48 @@ function ashimaGlocDemo() {
   
     var vs = "\
   const float pi = 3.1415926535897932384626433832795029 ; \
-  attribute vec2 Rxy;                       \
+\
+  attribute vec2 position2D;                       \
+  vec4 P,N; \
+  void map2Rto3P() { /* plain */ \
+    P = vec4(position2D.x,position2D.y,0.,1.);        \
+    N = vec4(0.,0.,1.,1.); \
+    }                                  \
+\
+  void map2Rto3Ps() { /* sphere */ \
+    vec2 v = position2D * pi; \
+    P = vec4(cos(v.x)*sin(v.y), sin(v.x)*sin(v.y), cos(v.y), 1.0);\
+    N = P;\
+    }                                  \
+\
   uniform mat4 pMatrix; \
   uniform mat4 mvMatrix;\
-  varying vec2 tRxy;                    \
 \
-  vec4 map2Rto3P(vec2 v) { /* plain */ \
-    return vec4(v.x,v.y,-1.0,1.);        \
-    }                                  \
-\
-  vec4 map2Rto3Ps(in vec2 v) { /* sphere */ \
-    v *= pi; \
-    return vec4(cos(v.x)*cos(v.y),sin(v.x)*cos(v.y), sin(v.y)-1.9, 1.0);\
-    }                                  \
+  varying vec4 normal; \
+  varying vec2 texCoord;                    \
 \
   void main(void) {                       \
-    tRxy = Rxy; \
-    gl_Position = pMatrix *  mvMatrix * map2Rto3P(Rxy);  \
+    map2Rto3P(); \
+    texCoord = position2D; \
+    normal = N;\
+   \
+    gl_Position = pMatrix *  (P*mvMatrix  - vec4(0.,0.,4,0.));  \
     /*gl_Position = vec4(Rxy, 1.0,1.0);*/\
     }";
 
     var fs = "#ifdef GL_ES\nprecision highp float;\n#endif\n\
   const float ipi = 1.0 / 3.1415926535897932384626433832795029 ; \
   uniform sampler2D tex0; \
-  varying vec2 tRxy; \
+  varying vec2 texCoord; \
+  varying vec4 normal; \
   void main(void) { \
     /*gl_FragColor = texture2D(tex0, tRxy );*/ \
-    gl_FragColor = vec4(abs(tRxy), 1.0,1.0 ); \
+    gl_FragColor = vec4(abs(texCoord), 1.0,1.0 ); \
     }";
   
     prog = awe.compileAndLink(vs, fs);
-    var num = 20;
-    var step = 2 / num;
+    var num = 40;
+    var step = 2 / (num-1);
      jverts = new Array;
     for (var j = 0; j < num; j++ )
     for (var i = 0; i < num; i++ )
@@ -102,10 +108,6 @@ function ashimaGlocDemo() {
     verts = awe.makeBuffer(gl.ARRAY_BUFFER,gl.FLOAT,2,gl.STATIC_DRAW,jverts );
     tris = awe.makeBuffer(gl.ELEMENT_ARRAY_BUFFER,gl.UNSIGNED_SHORT,3,gl.STATIC_DRAW,jtris );
 
-    pMatrix = new Float32Array(makePerspective( 120, 1, 0.1, 10. ));
-    mvMatrix = new Float32Array( [
-      0.5,0.5,0,0, -0.5,0.5,0,0, 0,0,1,0, 0,0,0,1
-      ]);
     }
 
 
@@ -118,13 +120,14 @@ function ashimaGlocDemo() {
   
     prog.aweUse();
     demoTex.aweSet(0, prog.aweSym['tex0'] );
-    verts.aweSetVertexAttPtr(prog.aweSym["Rxy"]);
+    verts.aweSetVertexAttPtr(prog.aweSym["position2D"]);
     }
   
   
   function updateCanvasSize() {
     curW = elemRoot.clientWidth;
     curH = elemRoot.clientHeight;
+    pMatrix = new Float32Array(makePerspective( 45, curW/curH, 2, 10. ));
     gl.viewport(0, 0, 
       gl.viewportWidth  = elemCanvas.width  = curW,
       gl.viewportHeight = elemCanvas.height = curH  );
@@ -135,18 +138,43 @@ function ashimaGlocDemo() {
     updateCanvasSize();
     D.animator.play();
     }
-  
+ 
+  function clearFrame()
+    {
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clearDepth(100.0);
+    gl.enable(gl.DEPTH_TEST);
+    gl.disable(gl.BLEND);
+    gl.enable(gl.CULL_FACE);
+    gl.depthFunc(gl.LEQUAL);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    } 
+
   function render() {
     var w = elemRoot.clientWidth;
     var h = elemRoot.clientHeight;
-  
+    phi += pi / 90;  
     if (w != curW || h != curH) {
       D.animator.pause();
       setTimeout(resizeNow,200);
       }
     else
       {
-      
+      clearFrame();  
+      ct = Math.cos(theta); st = Math.sin(theta);
+      cp = Math.cos(phi);   sp = Math.sin(phi);
+
+      /*mvMatrix = new Float32Array( [
+      ct*cp, -sp, st*cp, 0,
+      ct*sp,  cp, st*sp, 0,
+      -st,    0,  ct,    0,
+      0,      0,  0,     1.0 ] );*/
+      mvMatrix = new Float32Array( [
+      cp, -sp, 0, 0,
+      ct*sp, ct*cp ,-st , 0,
+      st*sp, st*cp, ct, 0,
+      0,      0,  0,     1.0 ] );
+
       gl.uniformMatrix4fv(prog.aweSym["pMatrix"], false, pMatrix);
       gl.uniformMatrix4fv(prog.aweSym["mvMatrix"], false, mvMatrix);
       tris.drawElements(gl.TRIANGLES);
@@ -158,7 +186,7 @@ function ashimaGlocDemo() {
 
   D.init = function(p) {
     elemRoot   = p;
-
+    
     elemCanvas = document.createElement("canvas");
     elemCanvas.style.zIndex = -1;
     elemCanvas.style.position = "absolute";
@@ -171,6 +199,9 @@ function ashimaGlocDemo() {
     renderinit();
     updateCanvasSize();
     D.animator = awe.animationStart(render,gl.canvas,1000/30,true);
+
+    theta = -1.0;
+    phi = 0;
     }
 
   var rendering = false;
