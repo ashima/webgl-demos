@@ -4,3 +4,6 @@
 [submodule "pano/demo-lib"]
 	path = pano/demo-lib
 	url = git://github.com/ashima/demo-lib.git
+[submodule "webgl-noise"]
+	path = webgl-noise
+	url = git@github.com:ashima/webgl-noise.git
