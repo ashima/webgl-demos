@@ -93,24 +93,25 @@ function ashimaGlocDemo() {
             0, 0, D, 0 ] ;
     } 
 
-    var precdecl = "#ifdef GL_ES\nprecision highp float;\n#endif";
-    var glol = new GLOL();
+  var precdecl = "#ifdef GL_ES\nprecision highp float;\n#endif";
+  var glol = new GLOL();
 
-    function link_prog(vglom,fglom) {
-	var vs;
-	try { vs = glol.link(precdecl,[],vglom) }
-	catch(e) { console.log(e); };
-	var fs;
-	try { fs = glol.link(precdecl,[],fglom) }
-	catch(e) { console.log(e); };
-
-	return awe.compileAndLink(vs,fs);
+  function link_prog(vglom,fglom) {
+    var vs;
+    try { vs = glol.link(precdecl,[],vglom) }
+    catch(e) { console.log(e); };
+    var fs;
+    try { fs = glol.link(precdecl,[],fglom) }
+    catch(e) { console.log(e); };
+      
+    r = awe.compileAndLink(vs,fs);
+    return r;
     }
 
-    function use_prog() {
-	prog.aweUse();
-	demoTex.aweSet(0, prog.aweSym['tex0'] );
-	verts.aweSetVertexAttPtr(prog.aweSym["position2D"]);
+  function use_prog() {
+    prog.aweUse();
+    demoTex.aweSet(0, prog.aweSym['tex0'] );
+    verts.aweSetVertexAttPtr(prog.aweSym["position2D"]);
     }
 
     function make_blend(a,b) {
@@ -197,51 +198,42 @@ function ashimaGlocDemo() {
 			 });
 	});
     }
-	
-    function glinit(callback) {
-	gl = awe.getGlContext(elemCanvas,{});
+
+  function glinit() {
+    gl = awe.getGlContext(elemCanvas,{"warningsAsErrors":true});
       
-	if (!gl) throw "No webgl here"; 
-
-	function glo_done() {
-	    prog = get_prog();
+    if (!gl) throw "No webgl here"; 
 	    
-	    var num = 20;
-	    var step = 2 / (num-1);
-	    jverts = new Array;
-	    for (var j = 0; j < num; j++ )
-            for (var i = 0; i < num; i++ )
-	    {
-		jverts[(j*num+i)*2+0] = i * step - 1.0;
-		jverts[(j*num+i)*2+1] = j * step - 1.0;
-	    }
-	    jtris = new Array;
-	    for (var j = 0; j < num-1 ; j++ )
-		for (var i = 0; i < num-1 ; i++ )
-	    {
-		jtris[ (j*(num-1)+i)*6 +0] = (j+0)*num+(i+0) ;   
-		jtris[ (j*(num-1)+i)*6 +1] = (j+0)*num+(i+1) ;   
-		jtris[ (j*(num-1)+i)*6 +2] = (j+1)*num+(i+0) ;   
-		
-		jtris[ (j*(num-1)+i)*6 +3] = (j+0)*num+(i+1) ;   
-		jtris[ (j*(num-1)+i)*6 +4] = (j+1)*num+(i+1) ;   
-		jtris[ (j*(num-1)+i)*6 +5] = (j+1)*num+(i+0) ;   
-	    }
-	    verts = awe.makeBuffer(gl.ARRAY_BUFFER,gl.FLOAT,2,gl.STATIC_DRAW,jverts );
-	    tris = awe.makeBuffer(gl.ELEMENT_ARRAY_BUFFER,gl.UNSIGNED_SHORT,3,gl.STATIC_DRAW,jtris );
+    var num = 20;
+    var step = 2 / (num-1);
+    jverts = new Array;
+    for (var j = 0; j < num; j++ )
+    for (var i = 0; i < num; i++ )
+      {
+      jverts[(j*num+i)*2+0] = i * step - 1.0;
+      jverts[(j*num+i)*2+1] = j * step - 1.0;
+      }
+    jtris = new Array;
+    for (var j = 0; j < num-1 ; j++ )
+    for (var i = 0; i < num-1 ; i++ )
+      {
+      jtris[ (j*(num-1)+i)*6 +0] = (j+0)*num+(i+0) ;   
+      jtris[ (j*(num-1)+i)*6 +1] = (j+0)*num+(i+1) ;   
+      jtris[ (j*(num-1)+i)*6 +2] = (j+1)*num+(i+0) ;   
+      
+      jtris[ (j*(num-1)+i)*6 +3] = (j+0)*num+(i+1) ;   
+      jtris[ (j*(num-1)+i)*6 +4] = (j+1)*num+(i+1) ;   
+      jtris[ (j*(num-1)+i)*6 +5] = (j+1)*num+(i+0) ;   
+      }
+    verts = awe.makeBuffer(gl.ARRAY_BUFFER,gl.FLOAT,2,gl.STATIC_DRAW,jverts );
+    tris = awe.makeBuffer(gl.ELEMENT_ARRAY_BUFFER,gl.UNSIGNED_SHORT,3,gl.STATIC_DRAW,jtris );
 	    
-	    pMatrix = new Float32Array(makePerspective( 120, 1, 0.1, 10. ));
-	    mvMatrix = new Float32Array( [
-		0.5,0.5,0,0, -0.5,0.5,0,0, 0,0,1,0, 0,0,0,1
-	    ]);
-	    callback();
-	}
-
-	make_progs(glo_done);
+    pMatrix = new Float32Array(makePerspective( 120, 1, 0.1, 10. ));
+    mvMatrix = new Float32Array([0.5,0.5,0,0, -0.5,0.5,0,0, 0,0,1,0, 0,0,0,1]);
     }
 
-    var demoTex, demoImg;
-    function renderinit()
+  var demoTex, demoImg;
+  function renderinit()
     {
     demoTex = awe.textureCreate();
     demoImg = new Image ;
@@ -249,11 +241,9 @@ function ashimaGlocDemo() {
       demoTex.aweFromElem(demoImg);
       demoTex.aweParams( gl.LINEAR, gl.LINEAR,
 			 gl.REPEAT, gl.REPEAT, false);
-    }
-	demoImg.onerror = function(e) { console.log(e); };
+      }
+    demoImg.onerror = function(e) { console.log(e); };
     demoImg.src = "Stone1.jpg";
-  
-    use_prog();
     }
 
   function updateCanvasSize() {
@@ -281,7 +271,7 @@ function ashimaGlocDemo() {
     gl.depthFunc(gl.LEQUAL);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     }
-  
+ 
   function render() {
     var w = elemRoot.clientWidth;
     var h = elemRoot.clientHeight;
@@ -292,24 +282,20 @@ function ashimaGlocDemo() {
       D.animator.pause();
       setTimeout(resizeNow,200);
       }
-    else
-      {
-	  clearFrame();
-	  ct = Math.cos(theta); st = Math.sin(theta);
-	  cp = Math.cos(phi);   sp = Math.sin(phi);
+    else {
+      ct = Math.cos(theta); st = Math.sin(theta);
+      cp = Math.cos(phi);   sp = Math.sin(phi);
 
-	  mvMatrix = new Float32Array([
-	      cp, -sp, 0, 0,
-	      ct*sp, ct*cp, -st, 0,
-	      st*sp, st*cp, ct, 0,
-	      0, 0, 0, 1.0]);
+      mvMatrix = new Float32Array([ cp,    -sp,   0,   0,
+                                    ct*sp, ct*cp, -st, 0,
+                                    st*sp, st*cp, ct,  0,
+                                    0,     0,     0,   1.0]);
 
-	  if (ready_for_switch()) {
-	      prog = get_prog();
-	      use_prog();
-	      render();
-	      return;
-	  } else {      
+      if (ready_for_switch())
+        prog = get_prog();
+      
+      use_prog();
+      clearFrame();
       gl.uniformMatrix4fv(prog.aweSym["pMatrix"], false, pMatrix);
       gl.uniformMatrix4fv(prog.aweSym["mvMatrix"], false, mvMatrix);
       gl.uniform1f(prog.aweSym["time"], now);
@@ -326,10 +312,8 @@ function ashimaGlocDemo() {
       gl.uniform4fv(prog.aweSym["pointLightingLocation"], [10.0,10.0,10.0,1.0]);
 
       tris.drawElements(gl.TRIANGLES);
-	  }
       }
     }
-  
   D.updateCanvasSize = updateCanvasSize;
   //D.updateElems = updateElems;
 
@@ -344,19 +328,13 @@ function ashimaGlocDemo() {
     elemDemo.appendChild(elemCanvas);
     elemRoot.appendChild(elemDemo);
 
-    glinit(function() {
-	renderinit();
-	updateCanvasSize();
-	D.animator = awe.animationStart(render,gl.canvas,1000/60,true);
-
-	theta = -1.0;
-	phi = 0;
-	callback();
-    }); 
-  }
-
-  var rendering = false;
-
-};
+    glinit();
+    renderinit();
+    make_progs(function() { prog = get_prog(); callback(); } );
+    D.animator = awe.animationStart(render,gl.canvas,1000/60,true);
+    theta = -1.0;
+    phi = 0;
+    }
+  };
 
 

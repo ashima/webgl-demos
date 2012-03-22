@@ -4,7 +4,6 @@ uniform float time;
 uniform float mixf;
 
 varying vec2 texCoord;
-varying vec4 position4;
 varying vec4 normal;
 varying vec4 pointLightingDirection;
 

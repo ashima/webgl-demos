@@ -13,10 +13,10 @@ uniform float mixv;
 
 varying vec4 normal;
 varying vec2 texCoord;
-varying vec4 position4;
 varying vec4 pointLightingDirection;
 
 void main(void) {
+    vec4 position4;
     vec4 Pa, Na, Pb, Nb;
     blenda(Pa, Na, position2D);
     blendb(Pb, Nb, position2D);
