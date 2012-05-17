@@ -7,6 +7,13 @@
   margin:0;
   height:800;
   width:800;
+}
+
+      #loading { margin: 1em; font-size: 200%; }
+      #stat { position: relative; top: 100px; left: 20px;
+      font-size: 200%; color: #CCC; display: none }
+      #v { color: orange }
+      #f { color: green }
 
       body {
         margin:0;
@@ -19,7 +26,9 @@
       Loading ...
     </div>
 
-    <div class="demowindow" id="demodiv" />
+    <div class="demowindow" id="demodiv">
+      <div id="stat">V <span id="v"></span> F <span id="f"></span></div>
+    </div>
 
     <script type="text/javascript" src="engine/awe0.js"></script>
     <script type="text/javascript"
@@ -27,11 +36,26 @@
     <script type="text/javascript" src="demo.js"></script>
 
     <script type="text/javascript">
-      agd = new ashimaGlocDemo;
+      var le = document.getElementById("loading");
+      var ve = document.getElementById("v");
+      var fe = document.getElementById("f");
+
+      function onprogress(n,v,f) {
+        le.innerText = "Loading ... "+n;
+      }
+
+      function onprogchange(vi,fi) {
+        ve.innerText = vi;
+        fe.innerText = fi;
+      }
+
+      agd = new ashimaGlocDemo(onprogress, onprogchange);
  
       function main() {
         gddiv = document.getElementById("demodiv");
         agd.init(gddiv, function () {
+          le.style.display = "none";
+          document.getElementById("stat").style.display = "block";
           agd.animator.play();
         });
         }

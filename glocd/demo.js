@@ -6,7 +6,7 @@
  * Description: A gloc demo module
  */
 
-function ashimaGlocDemo() {
+function ashimaGlocDemo(onprogress, onprogchange) {
   var D = this;
   var awe = ashimaWebGLEngine0;
   var epoch = (new Date()).getTime();
@@ -50,8 +50,8 @@ function ashimaGlocDemo() {
 		      function (vglom, fglom) {
 			  if (!( av in prog_cache)) prog_cache[av] = {};
 			  prog_cache[av][af] = link_prog(vglom,fglom);
-			  console.log("added "+av+" "+af);
 			  complete++;
+			  onprogress(complete,av,af);
 			  if (total == complete) callback();
 		      });
 	      })();
@@ -62,6 +62,7 @@ function ashimaGlocDemo() {
       var now = (new Date()).getTime() - epoch;
       var vi = Math.floor((now/vtrans) % vcycle.length);
       var fi = Math.floor((now/ftrans) % fcycle.length);
+      onprogchange(vi,fi);
       return prog_cache[vcycle[vi]][fcycle[fi]];
   }
 
@@ -93,7 +94,7 @@ function ashimaGlocDemo() {
             0, 0, D, 0 ] ;
     } 
 
-  var precdecl = "#ifdef GL_ES\nprecision highp float;\n#endif";
+  var precdecl = "#ifdef GL_ES\nprecision highp float;\n#endif\n";
   var glol = new GLOL();
 
   function link_prog(vglom,fglom) {
