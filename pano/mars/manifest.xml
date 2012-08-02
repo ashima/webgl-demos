@@ -36,6 +36,13 @@
   <link rel="prefetch" type="image/jpeg" href="panos/t_PHX.jpg"
 	data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/t_PHX.jpg" />
 
+  <link rel="prefetch" type="image/jpeg" href="panos/Greeley_pan_s.jpg"
+        title="Greeley" name="Greeley" data-type="pano"
+        data-thumb="panos/t_Greeley_pan_s.jpg"
+        data-src="http://www.ashimagroup.net/~mir/panorama/Greeley_pan_s.jpg" />
+  <link rel="prefetch" type="image/jpeg" href="panos/t_Greeley_pan_s.jpg"
+        data-src="http://www.ashimagroup.net/~mir/panorama/t_Greeley_pan_s.jpg" />
+
   <link rel="manifest" type="text/xml" href="../manifest.xml" />
   <link rel="start" type="text/html" href="../pano.html" />
 </manifest>
