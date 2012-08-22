@@ -80,11 +80,6 @@ var addEvent = (document.addEventListener)
   ? function (e, v, f, c) { e.addEventListener(v,f,c); }
   : function (e, v, f)    { e.attachEvent("on"+v,f); }
 
-function switchpan(e) {
-  if (d = document.getElementById(e) )
-    apv.setImage(d);
-  }
-
 var panos = [];
 var links = document.getElementsByTagName('link');
 for (var i = 0; i < links.length; i++) {
