@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="yes" ?>
+<viewer resource-base="http://www.ashimagroup.net/~sheets/pano/mars/panos/">
+  <category name="mer" thumb="mer">
+    <title>MER</title>
+    <pano src="panos/MER.jpg" name="mer" thumb="panos/t_MER.jpg">
+      <title>MER</title>
+      <pubdate></pubdate>
+      <description></description>
+      <adjust>
+        <brightness min="" max="" />
+      </adjust>
+    </pano>
+    <pano src="panos/MER2.jpg" name="mer2" thumb="panos/t_MER2.jpg">
+      <title>MER</title>
+      <pubdate></pubdate>
+      <description></description>
+    </pano>
+    <pano src="panos/MER3.jpg" name="mer3" thumb="panos/t_MER3.jpg">
+      <title>MER</title>
+      <pubdate></pubdate>
+      <description></description>
+    </pano>
+    <pano src="panos/MER4.jpg" name="mer4" thumb="panos/t_MER4.jpg">
+      <title>MER</title>
+      <pubdate></pubdate>
+      <description></description>
+    </pano>
+    <pano src="panos/MER5.jpg" name="mer5" thumb="panos/t_MER5.jpg">
+      <title>MER</title>
+      <pubdate></pubdate>
+      <description></description>
+    </pano>
+  </category>
+
+  <category name="mpf" thumb="mpf">
+    <title>MPF</title>
+    <pano src="panos/MPF.jpg" name="mpf" thumb="panos/t_MPF.jpg">
+      <title>MPF</title>
+      <pubdate></pubdate>
+      <description></description>
+    </pano>
+  </category>
+
+  <category name="phx" thumb="phx">
+    <title>PHX</title>
+    <pano src="panos/PHX.jpg" name="phx" thumb="panos/t_PHX.jpg">
+      <title>PHX</title>
+      <pubdate></pubdate>
+      <description></description>
+    </pano>
+  </category>
+
+  <category name="msl" thumb="greeley">
+    <title>MSL</title>
+    <pano src="panos/Greeley_pan_s.jpg" name="greeley" thumb="panos/t_Greeley_pan_s.jpg">
+      <title>Greeley</title>
+      <pubdate></pubdate>
+      <description></description>
+    </pano>
+  </category>
+</viewer>
