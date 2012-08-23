@@ -67,6 +67,8 @@ function renderinit()
 //var curW, curH, lat=0, lon=0;
 lat = 0;
 lon = 0;
+prev_lat = null;
+prev_lon = null;
 curW = 0;
 curH = 0;
 wrap = 4;
@@ -97,7 +99,7 @@ function render() {
   var w = elemRoot.clientWidth;
   var h = elemRoot.clientHeight;
 
-  lon = 2* pi * ( elemRoot.scrollLeft-wrap/2)/(elemPan.offsetWidth - w - wrap)  ;
+  lon = 2* pi * ( elemRoot.scrollLeft-wrap/2)/(elemPan.offsetWidth - w - wrap);
   lat = (1/saspect)* -pi * (elemRoot.scrollTop/(elemPan.offsetHeight - h)-0.5);
   if (lon > 2*pi) {
     lon -= 2*pi;
@@ -112,7 +114,7 @@ function render() {
     P.animator.pause();
     setTimeout(resizeNow,200);
     }
-  else
+  else if (lat != prev_lat || lon != prev_lon)
     {
     var ca = Math.cos(lat),  sa = Math.sin(lat);
     var co = Math.cos(lon),  so = Math.sin(lon);
@@ -125,6 +127,8 @@ function render() {
     gl.uniform2f(prog.aweSym["sas"], saspect, 0);
     gl.uniformMatrix3fv(prog.aweSym["trans"], false,trans);
     gl.drawArrays(gl.TRIANGLE_STRIP,0,verts.aweNumItems);
+
+    prev_lat = lat; prev_lon = lon;
     }
   }
 
@@ -156,6 +160,7 @@ function render() {
     saspect = (iw / ih) *0.5 ;
     panoTex.aweFromElem(i);
     zoom = 1 / saspect;
+    prev_lat = prev_lon = null;
     resizeNow();
     } 
   P.setZoom = function(_z) {
