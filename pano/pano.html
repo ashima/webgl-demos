@@ -1,37 +1,29 @@
 <html>
 <head>
 <title>Multiple Panorama Viewer</title>
-<link rel="prefetch" type="image/jpeg" href="panos/MER.jpg"
-      title="MER" name="MER" data-type="pano" data-thumb="panos/t_MER.jpg"
+<link rel="prefetch" type="image/jpeg" href="panos/MER.jpg" id="mer/mer1/"
       data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/MER.jpg" />
 
-<link rel="prefetch" type="image/jpeg" href="panos/MER2.jpg"
-      title="MER" name="MER2" data-type="pano" data-thumb="panos/t_MER2.jpg"
+<link rel="prefetch" type="image/jpeg" href="panos/MER2.jpg" id="mer/mer2/"
       data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/MER2.jpg" />
 
-<link rel="prefetch" type="image/jpeg" href="panos/MER3.jpg"
-      title="MER" name="MER3" data-type="pano" data-thumb="panos/t_MER3.jpg"
+<link rel="prefetch" type="image/jpeg" href="panos/MER3.jpg" id="mer/mer3/"
       data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/MER3.jpg" />
 
-<link rel="prefetch" type="image/jpeg" href="panos/MER4.jpg"
-      title="MER" name="MER4" data-type="pano" data-thumb="panos/t_MER4.jpg"
+<link rel="prefetch" type="image/jpeg" href="panos/MER4.jpg" id="mer/mer4/"
       data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/MER4.jpg" />
 
-<link rel="prefetch" type="image/jpeg" href="panos/MER5.jpg"
-      title="MER" name="MER5" data-type="pano" data-thumb="panos/t_MER5.jpg"
+<link rel="prefetch" type="image/jpeg" href="panos/MER5.jpg" id="mer/mer5/"
       data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/MER5.jpg" />
 
-<link rel="prefetch" type="image/jpeg" href="panos/MPF.jpg"
-      title="MPF" name="MPF" data-type="pano" data-thumb="panos/t_MPF.jpg"
+<link rel="prefetch" type="image/jpeg" href="panos/MPF.jpg" id="mpf/mpf/"
       data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/MPF.jpg" />
 
-<link rel="prefetch" type="image/jpeg" href="panos/PHX.jpg"
-      title="PHX" name="PHX" data-type="pano" data-thumb="panos/t_PHX.jpg"
+<link rel="prefetch" type="image/jpeg" href="panos/PHX.jpg" id="phx/phx/"
       data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/PHX.jpg" />
 
 <link rel="prefetch" type="image/jpeg" href="panos/Greeley_pan_s.jpg"
-      title="Greeley" name="Greeley" data-type="pano"
-      data-thumb="panos/t_Greeley_pan_s.jpg"
+      id="greeley/greeley/"
       data-src="http://www.ashimagroup.net/~mir/panorama/Greeley_pan_s.jpg"
       />
 
@@ -44,55 +36,76 @@
 
 <link rel="stylesheet" type="text/css" href="pano.css" />
 </head>
-<body onload="main()" >
+<body onload="main()">
 <article id="pano-container">
 <div class="isResizable" id="panodiv" width="200" height="200"></div>
-<nav class="pano">
+<nav data-base-uri="/webgl-demos/pano/">
 <ul id="zoom">
 <li id="bZoomIn" class="zoomin"></li>
 <li id="bZoomOut" class="zoomout"></li>
 </ul>
-<div id="navimg">
-  <div id="thumbs">
-    <div class="thumb">
+<div id="navcat">
+  <div class="index">
+    <h1>Mars Panorama Archive</h1>
+    This is the Ashima Group Mars Panorama Archive. These panoramas were
+    captured by NASA robots on MARS!
+    <a href="mer/" class="internal">Dismiss</a>
+  </div>
+  <div class="category" data-uri="mer">
+    <h1>Mars Exploration Rover</h1>
+    <div class="index">
+      <h1>Mars Exploration Rover</h1>
+      This is the Mars Exploration Rover index of...
+      <a href="mer1/" class="internal">Dismiss</a>
+    </div>
+    <div class="pano" data-uri="mer1">
       <img src="panos/t_MER.jpg"
            data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/t_MER.jpg"
            title="MER" />
     </div>
-    <div class="thumb">
+    <div class="pano" data-uri="mer2">
       <img src="panos/t_MER2.jpg"
            data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/t_MER2.jpg"
            title="MER" />
     </div>
-    <div class="thumb">
+    <div class="pano" data-uri="mer3">
       <img src="panos/t_MER3.jpg"
            data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/t_MER3.jpg"
            title="MER" />
     </div>
-    <div class="thumb">
+    <div class="pano" data-uri="mer4">
       <img src="panos/t_MER4.jpg"
            data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/t_MER4.jpg"
            title="MER" />
     </div>
-    <div class="thumb">
+    <div class="pano" data-uri="mer5">
       <img src="panos/t_MER5.jpg"
            data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/t_MER5.jpg"
            title="MER" />
     </div>
-
-    <div class="thumb">
+  </div>
+  
+  <div class="category" data-uri="mpf">
+    <h1>MPF</h1>
+    <div class="pano" data-uri="mpf">
       <img src="panos/t_MPF.jpg"
            data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/t_MPF.jpg"
            title="MPF" />
     </div>
-
-    <div class="thumb">
+  </div>
+  
+  <div class="category" data-uri="phx">
+    <h1>PHX</h1>
+    <div class="pano" data-uri="phx">
       <img src="panos/t_PHX.jpg"
            data-src="http://www.ashimagroup.net/~sheets/pano/mars/panos/t_PHX.jpg"
            title="PHX" />
     </div>
-
-    <div class="thumb">
+  </div>
+  
+  <div class="category" data-uri="greeley">
+    <h1>Greeley</h1>
+    <div class="pano" data-uri="greeley">
       <img src="panos/t_Greeley_pan_s.jpg"
            data-src="http://www.ashimagroup.net/~mir/panorama/t_Greeley_pan_s.jpg"
            title="Greeley" />
@@ -101,133 +114,9 @@
 </div>
 <div id="switchmsg">Switching...</div>
 </nav>
-
 <script type="text/javascript" src="engine/awe0.js"></script>
 <script type="text/javascript" src="pano.js"></script>
-
-<script type="text/javascript">
-<!--
-var apv = new ashimaPanoViewer();
-
-var addEvent = (document.addEventListener)
-  ? function (e, v, f, c) { e.addEventListener(v,f,c); }
-  : function (e, v, f)    { e.attachEvent("on"+v,f); }
-
-var panos = [];
-var links = document.getElementsByTagName('link');
-for (var i = 0; i < links.length; i++) {
-  var dt = links[i].attributes['data-type'];
-  if (dt && dt.value == 'pano') {
-    panos[panos.length] = { 'href': links[i].attributes['href'].value,
-                            'thumbhref': links[i].attributes['data-thumb'].value,
-                            'title': links[i].attributes['title'].value };
-  }
-}
-
-gif1x1 = "data:image/gif;base64,R0lGODlhAQABAJEAAP/Mmf/Mmf4BAgAAACH5BAQUAP8ALAAAAAABAAEAAAICRAEAOw==";
-
-var curI = 0;
-var zoomDelta = (1-1/16);
-var zoom = 1.0;
-
-function tryZoom(z) { 
-  if (z < 1.9) { apv.setZoom(z); return z; }
-  else return zoom;
-  }
-function zoomIn()  { zoom = tryZoom( zoom * zoomDelta) }
-function zoomOut() { zoom = tryZoom( zoom / zoomDelta) }
-
-function switchImage(i) {
-  for (var j = 0; j < panos.length; ++j)
-    panos[j].thumb.className = "thumbInAct";
-  panos[i].thumb.className = "thumbAct";
-
-  zoom = 1.0;
-
-  apv.setImage(panos[i].img);
-  }
-
-function loadNext() {
-  function addClick(e,j) {
-    addEvent( e, "click", function() { switchImage(j);}, false);
-    }
-
-  var e;
-
-  if (curI == 1)
-    switchImage(0);
-
-  if (curI > 0) {
-    e = panos[curI-1];
-    e.thumb.src = e.thumbhref;
-    addClick(e.thumb, curI-1);
-    //thumb.className += "thumb";
-    //e.img.parentNode.replaceChild(e.thumb, e.img);
-    }
- 
-  var e = panos[curI++];
-
-  if (curI <= panos.length) {
-    e.img.onload  = loadNext;
-    e.img.onerror = loadNext;
-    e.img.src = e.href;
-    }
-  }
-
-var run_main = false;
-function main() {
-  if (!run_main) {
-    var d,e,f, img;
-    apv.init( document.getElementById("panodiv") );
-
-    d = document.getElementById("thumbs");
-    for (var i=0;i<panos.length;++i) {
-      panos[i].img = img = new Image ;
-      panos[i].thumb = new Image;
-      //img.className += "thumb";
-      img.src=gif1x1;
-
-      e = document.createTextNode( panos[i].title );
-
-      f = document.createElement("div");
-      f.className += "thumb";
-      
-      f.appendChild(panos[i].thumb);
-      f.appendChild(e);
-
-      d.appendChild(f);
-    }
-    loadNext();
-
-    function zoomButton(e,f,dt) {
-      var t = 0;
-      function clear() {
-        if (t) {
-          clearTimeout(t); t = 0;
-        }
-      }
-      addEvent( e, "mousedown", function() { t = setInterval(f,dt); f(); }, false);
-      addEvent( e, "mouseup", clear, false);
-      addEvent( e, "mouseout", clear, false);
-      addEvent( e, "mouseleave", clear, false);
-      addEvent( e, "blur", clear, false);
-    }
-
-    zoomButton( document.getElementById("bZoomIn"), zoomIn, 33 ) ;
-    zoomButton( document.getElementById("bZoomOut"), zoomOut, 33 ) ;
-
-    run_main = true;
-  } else {
-    apv.updateElems();
-    //apv.animator.play();
-  }
-}
-
-function pause() {
-  //apv.animator.pause();
-}
-//-->
-</script>
+<script type="text/javascript" src="pano_ui.js"></script>
 </article>
 </body>
 </html>

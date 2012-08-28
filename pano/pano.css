@@ -23,7 +23,7 @@ body {
     display: box;
 }
 	
-nav.pano {
+nav {
     background-color:#fff;
     background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#bbb));
     background:-moz-linear-gradient(0% 0% 270deg,#FFFFFF, #bbb);
@@ -77,7 +77,7 @@ ul {
 		background:url("img/zoom_less.png") no-repeat scroll top right transparent;
 		}
 	
-div#navimg	{
+div#navcat      {
 		margin:0 auto;
 		padding-top:15px;
 		width:82px;
@@ -87,14 +87,14 @@ div#navimg	{
 		display:none;
 		}
 
-.thumb {
+.pano {
 		color: #000;
 		border:1px solid #999;
 		text-align:center;
 		margin-bottom:10px;
 		}
 
-.thumb img {
+.pano img {
 	  min-width: 80;
 	  min-height: 40;
 	  max-width: 80;
@@ -105,10 +105,17 @@ div#navimg	{
 	  cursor:pointer;
 	  }
 
-.thumbInAct {
+.panoInAct {
 	  opacity:0.6;
 	  }
 
-.thumbAct, .thumb img:hover  {
+.panoAct, .pano img:hover  {
 	  opacity:1.0;
 	  }
+
+.index { display: none; }
+.infoOverlay {
+    position: absolute;
+    opacity: 0.8; background-color: #bbb; padding: 1em; padding-top: 0;
+    top: 30px; left: 30px; width: 30%;
+}
