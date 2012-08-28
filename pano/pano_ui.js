@@ -20,7 +20,7 @@ var subpath_els = document.querySelectorAll('*[data-uri]');
 function showInfoOverlay(el) {
   var div = document.getElementById("panodiv");
   var info = el.cloneNode(true);
-  info.className = "infoOverlay";
+  info.className += " infoOverlay";
   var internal_links = info.querySelectorAll("a.internal");
   for (var i = 0; i < internal_links.length; i++) {
     addEvent(internal_links[i],"click",function(e) {
@@ -29,6 +29,8 @@ function showInfoOverlay(el) {
     },false);
   }
   div.appendChild(info);
+
+  return info;
 }
 
 function hideInfoOverlay() {
@@ -39,18 +41,18 @@ function hideInfoOverlay() {
   }
 }
 
-function showLoadScreen() {
-  var div = document.getElementById("panodiv");
-  var loader = document.createElement("div");
-  loader.className = "infoOverlay loadScreen";
-  loader.innerText = document.getElementById("loadmsg").innerText;
-  div.appendChild(loader);
+function showErrorStatus() {
+  showInfoOverlay(document.getElementById("errormsg"));
+}
+
+function showLoadStatus() {
+  var loader = showInfoOverlay(document.getElementById("loadmsg"));
   var timer = setInterval(function() {
       loader.innerText += ".";
   }, 200); // TODO: test spinner
   return {finish:function() {
       clearInterval(timer);
-      div.removeChild(loader);
+      loader.parentNode.removeChild(loader);
   }};
 }
 
@@ -58,6 +60,7 @@ function showPano(i,subpath) {
   var link = document.getElementById(subpath);
   var href = path_prefix + link.attributes['href'].value;
   var img = new Image;
+  var error = false;
   img.src = gif1x1;
   return function() {
     for (var j = 0; j < panos.length; j++) {
@@ -67,18 +70,20 @@ function showPano(i,subpath) {
 
     zoom = 1.0;
 
-    var spinner = showLoadScreen();
+    var spinner = showLoadStatus();
     img.onload = function(e) {
       spinner.finish();
       
       apv.setImage(img);
     };
     img.onerror = function() {
-      showErrorScreen(); // TODO: check
+      showErrorStatus();
+      error = true;
     };
     var a_uri = document.createElement("a");
     a_uri.href = img.src;
-    if (a_uri.pathname==href) img.onload();
+    if (a_uri.pathname==href && !error) img.onload();
+    else if (error) img.onerror();
     else img.src = href;
   };
 }

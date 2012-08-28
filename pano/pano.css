@@ -83,7 +83,7 @@ div#navcat      {
 		width:82px;
 		}
 		
-#loadmsg	{
+.status 	{
 		display:none;
 		}
 
@@ -115,12 +115,14 @@ div#navcat      {
 
 .index { display: none; }
 .infoOverlay {
+    display: block;
     position: absolute;
     opacity: 0.8; background-color: #bbb; padding: 1em; padding-top: 0;
     top: 30px; left: 30px; width: 30%;
 }
 
-.infoOverlay.loadScreen {
+.infoOverlay.status {
+    display: block;
     position: absolute;
     top: 45%; opacity: 1.0;
     left: 30%; right: 40%;
