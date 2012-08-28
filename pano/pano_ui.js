@@ -17,8 +17,6 @@ var addEvent = (document.addEventListener)
 var panos = document.querySelectorAll('.pano');
 var subpath_els = document.querySelectorAll('*[data-uri]');
 
-function showLoadScreen() { console.log("showLoadScreen"); } // TODO
-
 function showInfoOverlay(el) {
   var div = document.getElementById("panodiv");
   var info = el.cloneNode(true);
@@ -41,10 +39,24 @@ function hideInfoOverlay() {
   }
 }
 
+function showLoadScreen() {
+  var div = document.getElementById("panodiv");
+  var loader = document.createElement("div");
+  loader.className = "infoOverlay loadScreen";
+  loader.innerText = document.getElementById("loadmsg").innerText;
+  div.appendChild(loader);
+  var timer = setInterval(function() {
+      loader.innerText += ".";
+  }, 200); // TODO: test spinner
+  return {finish:function() {
+      clearInterval(timer);
+      div.removeChild(loader);
+  }};
+}
+
 function showPano(i,subpath) {
   var link = document.getElementById(subpath);
   var href = path_prefix + link.attributes['href'].value;
-  var is_loaded = false;
   var img = new Image;
   img.src = gif1x1;
   return function() {
@@ -55,16 +67,18 @@ function showPano(i,subpath) {
 
     zoom = 1.0;
 
-    showLoadScreen();
-
-    img.onload = function() {       
+    var spinner = showLoadScreen();
+    img.onload = function(e) {
+      spinner.finish();
+      
       apv.setImage(img);
-      is_loaded = true;
     };
     img.onerror = function() {
-      showErrorScreen(); // TODO
+      showErrorScreen(); // TODO: check
     };
-    if (is_loaded) img.onload();
+    var a_uri = document.createElement("a");
+    a_uri.href = img.src;
+    if (a_uri.pathname==href) img.onload();
     else img.src = href;
   };
 }
