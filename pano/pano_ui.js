@@ -89,7 +89,7 @@ function showPano(i,subpath) {
   };
 }
 
-function showCategory(i,subpath) {
+function showSection(i,subpath) {
   return function() { // TODO: check
     loadPath(constructPath(subpath_els[i].querySelector(".pano"),""));
     showInfoOverlay(subpath_els[i].querySelector(".index"));
@@ -117,7 +117,7 @@ var subpath;
 for (var i = 0; i < subpath_els.length; i++) {
   subpath = constructPath(subpath_els[i],"");
   subpaths[subpath] = {
-      "category": function() { return showCategory(i,subpath); },
+      "section": function() { return showSection(i,subpath); },
       "pano": function() { return showPano(i,subpath); }
   }[subpath_els[i].className]();
 }
