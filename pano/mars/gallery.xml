@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes" ?>
 <gallery
-    resource-base="http://www.ashimagroup.net/~sheets/pano/mars/"
+    resource-base="http://www.ashimagroup.net/~sheets/pano/mars/panos/"
     host-base="/webgl-demos/pano/mars/">
   <title>Mars Panorama Archive</title>
   <description>
