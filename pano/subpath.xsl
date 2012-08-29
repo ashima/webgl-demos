@@ -5,12 +5,21 @@
 
   <xsl:template name="subpath">
     <xsl:param name="suffix" select="''" />
+    <xsl:param name="inverse" select="false()" />
     <xsl:variable name="name" select="@name" />
     <xsl:choose>
-      <xsl:when test="$name">
+      <xsl:when test="$name and not($inverse)">
         <xsl:for-each select="..">
           <xsl:call-template name="subpath">
             <xsl:with-param name="suffix" select="concat($name,'/',$suffix)" />
+          </xsl:call-template>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:when test="$name and $inverse">
+        <xsl:for-each select="..">
+          <xsl:call-template name="subpath">
+            <xsl:with-param name="suffix" select="concat('../',$suffix)" />
+            <xsl:with-param name="inverse" select="$inverse" />
           </xsl:call-template>
         </xsl:for-each>
       </xsl:when>
