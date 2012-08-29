@@ -1,6 +1,6 @@
 <messages>
-  <message id="ok">View Panorama</message>
-  <message id="override">Try Viewing Panorama Anyway</message>
+  <message id="ok">View Gallery</message>
+  <message id="override">Try Viewing Gallery Anyway</message>
   <message id="subtitle">
     An <a href="http://ashimagroup.net/">Ashima</a> WebGL Demonstration
   </message>
