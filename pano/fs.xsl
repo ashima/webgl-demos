@@ -31,7 +31,13 @@
     <xsl:variable name="subpath">
       <xsl:call-template name="subpath" />
     </xsl:variable>
-    <xsl:text>ln -s index.html </xsl:text>
+    <xsl:variable name="subpath_inv">
+      <xsl:call-template name="subpath">
+        <xsl:with-param name="inverse" select="true()"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ln -s </xsl:text>
+    <xsl:value-of select="concat($subpath_inv,'index.html ')" />
     <xsl:value-of select="concat($subpath,'index.html')" />
     <xsl:text>&#xA;</xsl:text>
   </xsl:template>
@@ -41,7 +47,7 @@
       <xsl:call-template name="subpath_qxp" />
     </xsl:variable>
     <xsl:text>xsltproc --param subfeed </xsl:text>
-    <xsl:value-of select="$subpath_qxp" />
+    <xsl:value-of select="concat('//',$subpath_qxp)" />
     <xsl:text> ../atom.xsl gallery.xml &gt; </xsl:text>
     <xsl:value-of select="@name" />
     <xsl:text>/index.atom&#xA;</xsl:text>
@@ -63,7 +69,7 @@
     <xsl:variable name="subpath">
       <xsl:call-template name="subpath" />
     </xsl:variable>
-    <xsl:text>rm -rv </xsl:text><xsl:value-of select="$subpath" />
+    <xsl:text>rm -rfv </xsl:text><xsl:value-of select="$subpath" />
     <xsl:text>&#xA;</xsl:text>
   </xsl:template>
 
