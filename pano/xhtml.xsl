@@ -58,11 +58,19 @@
     </div>
   </xsl:template>
 
+  <xsl:template match="term"><em><xsl:value-of select="." /></em></xsl:template>
+
+  <xsl:template match="@* | node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()" />
+    </xsl:copy>
+  </xsl:template>
+
   <xsl:template name="section-index">
     <div class="index">
       <h1><xsl:value-of select="title" /></h1>
       <p>
-        <xsl:copy-of select="description/*" />
+        <xsl:apply-templates select="description/node()" />
       </p>
     </div>
   </xsl:template>
