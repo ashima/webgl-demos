@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="yes" ?>
 <gallery
-    resource-base="http://www.ashimagroup.net/~sheets/pano/mars/panos/"
+    resource-base="http://ashimagroup.net/~sheets/pano/mars/panos/"
     host-base="/webgl-demos/pano/mars/">
   <title>Mars Panorama Archive</title>
   <description>
@@ -17,27 +17,27 @@
       were launched in June and July 2003 and landed successfully in
       January 2004.
     </description>
-    <pano src="MER.jpg" name="mer-b-2004" thumb="t_MER.jpg">
+    <pano src="MER.jpg" name="b-2004" thumb="t_MER.jpg">
       <title>MER-B 2004</title>
       <pubdate>2012-08-01T13:00:00-07:00</pubdate>
       <description>Captured: 2004</description>
     </pano>
-    <pano src="MER2.jpg" name="mer-a-2004" thumb="t_MER2.jpg">
+    <pano src="MER2.jpg" name="a-2004" thumb="t_MER2.jpg">
       <title>MER-A 2004</title>
       <pubdate>2012-08-01T13:00:01-07:00</pubdate>
       <description>Captured: 2004</description>
     </pano>
-    <pano src="MER3.jpg" name="mer-a-2009" thumb="t_MER3.jpg">
+    <pano src="MER3.jpg" name="a-2009" thumb="t_MER3.jpg">
       <title>MER-A 2009</title>
       <pubdate>2012-08-01T13:00:02-07:00</pubdate>
       <description>Captured: 2009</description>
     </pano>
-    <pano src="MER4.jpg" name="mer-b-2008" thumb="t_MER4.jpg">
+    <pano src="MER4.jpg" name="b-2008" thumb="t_MER4.jpg">
       <title>MER-B 2008</title>
       <pubdate>2012-08-01T13:00:03-07:00</pubdate>
       <description>Captured: 2008</description>
     </pano>
-    <pano src="MER5.jpg" name="mer-b-2006" thumb="t_MER5.jpg">
+    <pano src="MER5.jpg" name="b-2006" thumb="t_MER5.jpg">
       <title>MER-B 2006</title>
       <pubdate>2012-08-01T13:00:04-07:00</pubdate>
       <description>Captured: 2006</description>
