@@ -1,0 +1,92 @@
+<?xml version="1.0" standalone="yes" ?>
+<gallery
+    resource-base="http://www.ashimagroup.net/~sheets/pano/mars/"
+    host-base="/webgl-demos/pano/mars/">
+  <title>Mars Panorama Archive</title>
+  <description>
+    This is the Ashima Group Mars Panorama Archive. These panoramic
+    images were captured by NASA/JPL robots on the surface of Mars.
+  </description>
+  <section name="mer">
+    <title>Mars Exploration Rover</title>
+    <description>
+      The <a
+      href="http://en.wikipedia.org/wiki/Mars_Exploration_Rover">Mars
+      Exploration Rover</a> mission involved two rovers,
+      <term>Spirit</term> and <term>Opportunity</term>. The rovers
+      were launched in June and July 2003 and landed successfully in
+      January 2004.
+    </description>
+    <pano src="MER.jpg" name="mer-b-2004" thumb="t_MER.jpg">
+      <title>MER-B 2004</title>
+      <pubdate>2012-08-01T13:00:00-07:00</pubdate>
+      <description>Captured: 2004</description>
+    </pano>
+    <pano src="MER2.jpg" name="mer-a-2004" thumb="t_MER2.jpg">
+      <title>MER-A 2004</title>
+      <pubdate>2012-08-01T13:00:01-07:00</pubdate>
+      <description>Captured: 2004</description>
+    </pano>
+    <pano src="MER3.jpg" name="mer-a-2009" thumb="t_MER3.jpg">
+      <title>MER-A 2009</title>
+      <pubdate>2012-08-01T13:00:02-07:00</pubdate>
+      <description>Captured: 2009</description>
+    </pano>
+    <pano src="MER4.jpg" name="mer-b-2008" thumb="t_MER4.jpg">
+      <title>MER-B 2008</title>
+      <pubdate>2012-08-01T13:00:03-07:00</pubdate>
+      <description>Captured: 2008</description>
+    </pano>
+    <pano src="MER5.jpg" name="mer-b-2006" thumb="t_MER5.jpg">
+      <title>MER-B 2006</title>
+      <pubdate>2012-08-01T13:00:04-07:00</pubdate>
+      <description>Captured: 2006</description>
+    </pano>
+  </section>
+
+  <section name="mpf">
+    <title>Mars Pathfinder</title>
+    <description>The <a
+    href="http://en.wikipedia.org/wiki/Mars_Pathfinder">Mars
+    Pathfinder</a> mission landed a stationary base station,
+    <term>Carl Sagan Memorial Station</term>, and a 10.6 kg rover,
+    <term>Sojourner</term>.</description>
+    <pano src="MPF.jpg" name="1997-1" thumb="t_MPF.jpg">
+      <title>MPF 1997</title>
+      <pubdate>2012-08-01T12:00:00-07:00</pubdate>
+      <description>Captured: 1997</description>
+    </pano>
+  </section>
+
+  <section name="phx">
+    <title><term>Phoenix</term> Lander</title>
+    <description>The <a
+    href="http://en.wikipedia.org/wiki/Phoenix_lander"><term>Phoenix</term>
+    Lander</a> descended to the surface of Mars on May 25, 2008.
+    </description>
+    <pano src="PHX.jpg" name="2008-1" thumb="t_PHX.jpg">
+      <title>PHX 2008</title>
+      <pubdate>2012-08-01T12:00:01-07:00</pubdate>
+      <description>Captured: 2008</description>
+    </pano>
+  </section>
+
+  <section name="msl">
+    <title>Mars Science Laboratory</title>
+    <description>The <a
+    href="http://en.wikipedia.org/wiki/Mars_Science_Laboratory">Mars
+    Science Laboratory</a> is a currently ongoing (as of Aug. 28,
+    2012) NASA mission which landed a rover, <term>Curiosity</term>,
+    in <a href="http://en.wikipedia.org/wiki/Gale_(crater)">Gale
+    Crater</a> on Aug. 6, 2012.
+    </description>
+    <pano
+        resource-base="http://www.ashimagroup.net/~mir/panorama/"
+        src="Greeley_pan_s.jpg" name="greeley-2012"
+        thumb="t_Greeley_pan_s.jpg">
+      <title>Greeley 2012</title>
+      <pubdate>2012-08-27T13:00:00-07:00</pubdate>
+      <description>Captured: 2012</description>
+    </pano>
+  </section>
+</gallery>
