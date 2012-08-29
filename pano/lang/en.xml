@@ -4,4 +4,6 @@
   <message id="subtitle">
     An <a href="http://ashimagroup.net/">Ashima</a> WebGL Demonstration
   </message>
+  <message id="pano/load">Downloading</message>
+  <message id="pano/error">Download Error</message>
 </messages>
