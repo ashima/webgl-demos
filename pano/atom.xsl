@@ -6,7 +6,7 @@
 
   <xsl:import href="subpath.xsl" />
 
-  <xsl:param name="host" select="'http://ashimagroup.net'" />
+  <xsl:param name="host" select="'http://localhost:8000'" />
   <xsl:param name="publisher" select="'Ashima Group'" />
   <xsl:param name="email" select="'info@ashimagroup.net'" />
   <xsl:param name="subfeed" select="gallery" />
@@ -52,7 +52,8 @@
       <xsl:call-template name="subpath" />
     </xsl:variable>
     <xsl:call-template name="feed">
-      <xsl:with-param name="self" select="concat($host,/@host-base,$subpath)" />
+      <xsl:with-param name="self"
+                      select="concat($host,/gallery/@host-base,$subpath)" />
     </xsl:call-template>
   </xsl:template>
 
@@ -60,7 +61,7 @@
     <xsl:variable name="subpath">
       <xsl:call-template name="subpath" />
     </xsl:variable>
-    <xsl:variable name="self" select="concat($host,/@host-base,$subpath)" />
+    <xsl:variable name="self" select="concat($host,/gallery/@host-base,$subpath)" />
     <entry>
       <title><xsl:apply-templates select="title" /></title>
       <link rel="alternate" type="text/html" href="{$self}" />
