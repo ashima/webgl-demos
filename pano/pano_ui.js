@@ -77,6 +77,7 @@ function showPano(i,subpath) {
       apv.setImage(img);
     };
     img.onerror = function() {
+      spinner.finish();
       showErrorStatus();
       error = true;
     };
