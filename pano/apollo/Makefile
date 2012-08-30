@@ -9,7 +9,7 @@ index.html: static-manifest.xml
 	xsltproc ../gallery.xsl static-manifest.xml > index.html
 
 static: static-manifest.xml
-	xsltproc ../demo-lib/static-assets.xsl static-manifest.xml | uniq | sh
+	xsltproc ../demo-lib/local-assets.xsl static-manifest.xml | uniq | sh
 
 clean:
 	rm static-manifest.xml index.html

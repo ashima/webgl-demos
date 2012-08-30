@@ -14,14 +14,13 @@ gallery.html: gallery.xml
 	xsltproc ../xhtml.xsl gallery.xml > gallery.html
 
 index.html: static-manifest.xml gallery.html
-	xsltproc --stringparam reldir ../ \
-	         ../gallery.xsl static-manifest.xml > index.html
+	xsltproc ../gallery.xsl static-manifest.xml > index.html
 
 index.atom: gallery.xml
 	xsltproc ../atom.xsl gallery.xml > index.atom
 
 static: static-manifest.xml
-	xsltproc ../demo-lib/static-assets.xsl static-manifest.xml | uniq | sh
+	xsltproc ../demo-lib/local-assets.xsl static-manifest.xml | uniq | sh
 	xsltproc ../fs.xsl gallery.xml | sh
 
 clean:
