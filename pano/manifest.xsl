@@ -9,7 +9,7 @@
     <manifest>
       <xsl:apply-templates select="//pano" />
       <link rel="manifest" type="text/xml" href="../manifest.xml" />
-      <link rel="start" type="text/html" href="gallery.html" />
+      <link rel="start" type="text/html" href="gallery.xhtml" />
     </manifest>
   </xsl:template>
 
@@ -34,7 +34,7 @@
       <xsl:call-template name="subpath" />
     </xsl:variable>
     <link rel="prefetch" type="image/jpeg" href="panos/{@src}"
-          title="{title}" name="{$subpath}" data-type="pano"
+          title="{title}" id="{$subpath}" data-type="pano"
           data-thumb="panos/{@thumb}"
           data-src="{$base}{@src}" />
     <link rel="thumbnail" type="image/jpeg" href="panos/{@thumb}"
