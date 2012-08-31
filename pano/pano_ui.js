@@ -58,7 +58,7 @@ function showLoadStatus() {
 
 function showPano(i,subpath) {
   var link = document.getElementById(subpath);
-  var href = path_prefix + link.attributes['href'].value;
+  var href = link.attributes['href'].value;
   var img = new Image;
   var error = false;
   img.src = gif1x1;
