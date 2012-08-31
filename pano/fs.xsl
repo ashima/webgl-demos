@@ -36,7 +36,7 @@
         <xsl:with-param name="inverse" select="true()"/>
       </xsl:call-template>
     </xsl:variable>
-    <xsl:text>ln -s </xsl:text>
+    <xsl:text>ln -fs </xsl:text>
     <xsl:value-of select="concat($subpath_inv,'index.html ')" />
     <xsl:value-of select="concat($subpath,'index.html')" />
     <xsl:text>&#xA;</xsl:text>
