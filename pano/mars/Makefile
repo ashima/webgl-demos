@@ -1,6 +1,6 @@
 .PHONY: all static clean
 
-OBJS := manifest.xml static-manifest.xml gallery.html index.html index.atom
+OBJS := manifest.xml static-manifest.xml gallery.xhtml index.html index.atom
 
 all: index.html index.atom static
 
@@ -8,12 +8,13 @@ manifest.xml: gallery.xml
 	xsltproc ../manifest.xsl gallery.xml > manifest.xml
 
 static-manifest.xml: manifest.xml
-	xsltproc ../demo-lib/static-manifest.xsl manifest.xml > static-manifest.xml
+	xsltproc --param rooted true\(\) \
+	         ../demo-lib/static-manifest.xsl manifest.xml > static-manifest.xml
 
-gallery.html: gallery.xml
-	xsltproc ../xhtml.xsl gallery.xml > gallery.html
+gallery.xhtml: gallery.xml
+	xsltproc ../xhtml.xsl gallery.xml > gallery.xhtml
 
-index.html: static-manifest.xml gallery.html
+index.html: static-manifest.xml gallery.xhtml
 	xsltproc ../gallery.xsl static-manifest.xml > index.html
 
 index.atom: gallery.xml
@@ -23,7 +24,10 @@ static: static-manifest.xml
 	xsltproc ../demo-lib/local-assets.xsl static-manifest.xml | uniq | sh
 	xsltproc ../fs.xsl gallery.xml | sh
 
-clean:
-	rm -f ${OBJS}
+clean: static-manifest.xml
+	xsltproc --stringparam action delete \
+	         ../demo-lib/local-assets.xsl static-manifest.xml | uniq | sh
 	xsltproc --stringparam action delete \
 	         ../fs.xsl gallery.xml | sh
+	rm -f ${OBJS}
+
