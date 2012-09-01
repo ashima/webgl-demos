@@ -128,4 +128,5 @@ div#navcat      {
     left: 30%; right: 40%;
     background-color: #bbb; padding: 0.5em;
     font-size: 1.5em;
+    overflow: hidden;
 }
