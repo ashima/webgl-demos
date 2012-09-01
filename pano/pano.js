@@ -9,11 +9,12 @@ function ashimaPanoViewer() {
 var P = this;
 var awe = ashimaWebGLEngine0;
 
-var gl, prog, verts, panoTex;
+var gl, prog, verts, panoTex, panoStopTimer;
 var pi = 3.1415926535897932384626433832795029 ;
 var elemPan, elemRoot, elemCanvas;
 var zoom = 1.0;
 var saspect = 8 /2;
+var panoStopDelay = 500;
 
 function glinit() {
   gl = awe.getGlContext(elemCanvas,{});
@@ -129,6 +130,8 @@ function render() {
     gl.drawArrays(gl.TRIANGLE_STRIP,0,verts.aweNumItems);
 
     prev_lat = lat; prev_lon = lon;
+    clearTimeout(panoStopTimer);
+    panoStopTimer = setTimeout(P.onPanoStop,panoStopDelay,lat,lon);
     }
   }
 
@@ -151,7 +154,7 @@ function render() {
     updateElems();
     updateCanvasSize();
     P.animator = awe.animationStart(render,gl.canvas,1000/30,true);
-    }
+  };
 
   P.setImage = function(i) {
     var iw = i.naturalWidth,
@@ -161,12 +164,16 @@ function render() {
     zoom = 1 / saspect;
     prev_lat = prev_lon = null;
     resizeNow();
-    }
+  };
   P.setZoom = function(_z) {
     zoom = _z;
     updateElems();
-    }
-
+  };
+  P.setView = function(lat_,lon_) {
+    lat = lat_;
+    lon = lon_;
+  };
+  P.onPanoStop = function(lat,lon) { }
 };
 
 
