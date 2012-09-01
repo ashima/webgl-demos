@@ -56,6 +56,25 @@ function showLoadStatus() {
   }};
 }
 
+apv.onPanoStop = function(lat, lon) {
+  history.replaceState({webgl:1},"","#?lat="+lat+"&lon="+lon);
+}
+
+function normHash(h) {
+  var hfqp = {lat: 0, lon: 0};
+  var q = h.substr(2);
+  var kvp = q.split("&");
+  if ("#?" == h.substr(0,2)) {
+    for (var i = 0; i < kvp.length; i++) {
+      kvp[i] = kvp[i].split("=");
+      hfqp[kvp[i][0]] = parseFloat(kvp[i][1]);
+    }
+
+    history.replaceState({webgl:1},"","#?lat="+hfqp.lat+"&lon="+hfqp.lon);
+  }
+  return [hfqp.lat,hfqp.lon];
+}
+
 function showPano(i,subpath) {
   var link = document.getElementById(subpath);
   var href = link.attributes['href'].value;
@@ -72,8 +91,10 @@ function showPano(i,subpath) {
 
     var spinner = showLoadStatus();
     img.onload = function(e) {
+      var panoCoord = normHash(window.location.hash);
       spinner.finish();
       
+      apv.setView(panoCoord[0],panoCoord[1]);
       apv.setImage(img);
     };
     img.onerror = function() {
