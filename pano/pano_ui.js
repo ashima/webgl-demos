@@ -1,5 +1,5 @@
 var run_main = false;
-var main = function() { // namespace
+var main_pause = function() { // namespace
 
 var path_prefix = document.querySelector('nav').attributes['data-base-uri'].value;
 
@@ -133,7 +133,7 @@ function loadPath(subpath) {
 function pushPath(subpath) {
   return function() {
     loadPath(subpath);
-    history.pushState({webgl:1,pano:1},"",path_prefix+subpath);
+    history.pushState({webgl:1},"",path_prefix+subpath);
   };
 }
 
@@ -146,13 +146,6 @@ function subpath_of_path(path) {
   return subpath_requested;  
 }
 
-var old_window_onpopstate = window.onpopstate;
-window.onpopstate = function (e) {
-  if (e.state && e.state.pano==1) {
-    loadPath(subpath_of_path(window.location.pathname));
-  } else if (old_window_onpopstate) { old_window_onpopstate(e); }
-};
-
 function tryZoom(z) { 
   if (z < 1.9) { apv.setZoom(z); return z; }
   else return zoom;
@@ -160,7 +153,7 @@ function tryZoom(z) {
 function zoomIn()  { zoom = tryZoom( zoom * zoomDelta) }
 function zoomOut() { zoom = tryZoom( zoom / zoomDelta) }
 
-return function() { // main
+return [function() { // main
   if (!run_main) {
     var label,f,img;
     apv.init( document.getElementById("panodiv") );
@@ -191,16 +184,19 @@ return function() { // main
     zoomButton( document.getElementById("bZoomOut"), zoomOut, 33 ) ;
 
     loadPath(subpath_of_path(window.location.pathname));
-    history.replaceState({webgl:1,pano:1},"");
+    history.replaceState({webgl:1},"");
 
     run_main = true;
   } else {
+    loadPath(subpath_of_path(window.location.pathname));
     apv.updateElems();
-    //apv.animator.play();
+    apv.animator.play();
   }
-}
+},
+function() { // pause
+  apv.animator.pause();
+}];
 }();
 
-function pause() {
-  //apv.animator.pause();
-}
+main = main_pause[0];
+pause = main_pause[1];
