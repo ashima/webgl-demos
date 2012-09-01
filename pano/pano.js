@@ -80,10 +80,10 @@ function updateElems() {
   elemPan.style.height = curH * 2/(zoom *saspect);
   elemRoot.scrollLeft = lon * (elemPan.offsetWidth - curW-wrap) / (2*pi)+wrap/2;
   elemRoot.scrollTop  =  (-lat*saspect / pi + 0.5) * (elemPan.offsetHeight - curH) ;
-  } 
+  }
 
 function updateCanvasSize() {
-  gl.viewport(0, 0, 
+  gl.viewport(0, 0,
     gl.viewportWidth  = elemCanvas.width  = curW,
     gl.viewportHeight = elemCanvas.height = curH  );
   }
@@ -152,7 +152,6 @@ function render() {
     updateCanvasSize();
     P.animator = awe.animationStart(render,gl.canvas,1000/30,true);
     }
-  var rendering = false;
 
   P.setImage = function(i) {
     var iw = i.naturalWidth,
@@ -162,7 +161,7 @@ function render() {
     zoom = 1 / saspect;
     prev_lat = prev_lon = null;
     resizeNow();
-    } 
+    }
   P.setZoom = function(_z) {
     zoom = _z;
     updateElems();
