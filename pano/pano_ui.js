@@ -57,7 +57,8 @@ function showLoadStatus() {
 }
 
 apv.onPanoStop = function(az, el) {
-  history.replaceState({webgl:1},"","#?az="+az+"&el="+el);
+  if (az!=0 || el!=0)
+    history.replaceState({webgl:1},"","#?az="+az+"&el="+el);
 }
 
 function normHash(h) {
@@ -70,7 +71,7 @@ function normHash(h) {
       hfqp[kvp[i][0]] = parseFloat(kvp[i][1]);
     }
 
-    history.replaceState({webgl:1},"","#?az="+hfqp.az+"&el="+hfqp.el);
+    apv.onPanoStop(hfqp.az,hfqp.el);
   }
   return hfqp;
 }
