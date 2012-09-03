@@ -2,6 +2,8 @@
 
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <xsl:import href="subpath.xsl" />
   
   <xsl:variable name="demo-text" select="document('lang/en.xml')" />
   <xsl:output method="xml" />
@@ -72,6 +74,16 @@
       <p>
         <xsl:apply-templates select="description/node()" />
       </p>
+      <ul>
+        <xsl:for-each select="section | pano">
+          <xsl:variable name="subpath">
+            <xsl:call-template name="subpath" />
+          </xsl:variable>
+          <li><a href="{/gallery/@host-base}{$subpath}" class="internal">
+            <xsl:value-of select="title" />
+          </a></li>
+        </xsl:for-each>
+      </ul>
     </div>
   </xsl:template>
 
