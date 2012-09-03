@@ -12,6 +12,10 @@
     <html>
       <head>
         <title><xsl:apply-templates select="title" /></title>
+        <link rel="alternate"
+              type="application/atom+xml"
+              title="{title}"
+              href="{@host-base}index.atom" />
       </head>
       <body onload="main()">
         <article id="pano-container">
@@ -84,6 +88,9 @@
           </a></li>
         </xsl:for-each>
       </ul>
+      <a href="index.atom">
+        <div class="rss" title="RSS" />
+      </a>
     </div>
   </xsl:template>
 

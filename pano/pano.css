@@ -72,14 +72,24 @@ ul {
 		cursor:pointer;
 		}
 	
-.zoomin  {
-		background:url("img/zoom_more.png") no-repeat scroll top right transparent;		
-		margin-right:15px;
-		}
+.zoomin {
+    background:url("img/zoom_more.png") no-repeat scroll top right transparent;
+    margin-right:15px;
+}
 
-.zoomout	{
-		background:url("img/zoom_less.png") no-repeat scroll top right transparent;
-		}
+.zoomout {
+    background:url("img/zoom_less.png") no-repeat scroll top right transparent;
+}
+
+.rss {
+    width: 34px; height: 34px;
+    background:url("img/rss.png") no-repeat scroll top right transparent;
+}
+
+.rss:hover {
+    width: 34px; height:34px;
+    background:url("img/rss_orange.png") no-repeat scroll top right transparent;
+}
 	
 div#navcat      {
 		margin:0 auto;

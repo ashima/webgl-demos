@@ -4,6 +4,11 @@
 	data-src="http://www.ashimagroup.net/~sheets/pano/assets/zoom_more.png" />
   <link rel="prefetch" type="image/png" href="img/zoom_less.png"
 	data-src="http://www.ashimagroup.net/~sheets/pano/assets/zoom_less.png" />
+  <link rel="prefetch" type="image/png" href="img/rss.png"
+	data-src="http://www.ashimagroup.net/~sheets/pano/assets/rss.png" />
+  <link rel="prefetch" type="image/png" href="img/rss_orange.png"
+	data-src="http://www.ashimagroup.net/~sheets/pano/assets/rss_orange.png" />
+
   <link rel="stylesheet" type="text/css" href="pano.css" />
   <link rel="tag" type="text/javascript" href="engine/awe0.js" />
   <link rel="tag" type="text/javascript" href="pano.js" />
