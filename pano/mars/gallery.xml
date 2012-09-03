@@ -8,7 +8,7 @@
     images were captured by NASA/JPL robots on the surface of Mars.
   </description>
 
-  <section name="msl">
+  <section name="msl" resource-base="http://www.ashimagroup.net/~mir/panorama/">
     <title>Mars Science Laboratory</title>
     <description>The <a
     href="http://en.wikipedia.org/wiki/Mars_Science_Laboratory">Mars
@@ -17,6 +17,21 @@
     in <a href="http://en.wikipedia.org/wiki/Gale_(crater)">Gale
     Crater</a> on Aug. 6, 2012.
     </description>
+    <pano src="MSL_nav1.jpg" name="nav1" thumb="t_MSL_nav1.jpg">
+      <title>Curiosity NavCam Full 2012</title>
+      <pubdate>2012-09-03T14:06:41-07:00</pubdate>
+      <description>Captured: 2012</description>
+    </pano>
+    <pano src="MSL2.jpg" name="2" thumb="t_MSL2.jpg">
+      <title>Curiosity First Color Pan 2012</title>
+      <pubdate>2012-09-03T14:08:41-07:00</pubdate>
+      <description>Captured: 2012</description>
+    </pano>
+    <pano src="MSL1.jpg" name="1" thumb="t_MSL1.jpg">
+      <title>First Curiosity Pan 2012</title>
+      <pubdate>2012-09-03T14:10:41-07:00</pubdate>
+      <description>Captured: 2012</description>
+    </pano>
   </section>
 
   <section name="phx">
