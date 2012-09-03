@@ -7,8 +7,41 @@
     This is the Ashima Group Mars Panorama Archive. These panoramic
     images were captured by NASA/JPL robots on the surface of Mars.
   </description>
+
+  <section name="msl">
+    <title>Mars Science Laboratory</title>
+    <description>The <a
+    href="http://en.wikipedia.org/wiki/Mars_Science_Laboratory">Mars
+    Science Laboratory</a> is a currently ongoing (as of Aug. 28,
+    2012) NASA mission which landed a rover, <term>Curiosity</term>,
+    in <a href="http://en.wikipedia.org/wiki/Gale_(crater)">Gale
+    Crater</a> on Aug. 6, 2012.
+    </description>
+  </section>
+
+  <section name="phx">
+    <title><term>Phoenix</term> Lander</title>
+    <description>The <a
+    href="http://en.wikipedia.org/wiki/Phoenix_lander"><term>Phoenix</term>
+    Lander</a> descended to the surface of Mars on May 25, 2008.
+    </description>
+    <pano src="PHX.jpg" name="2008-1" thumb="t_PHX.jpg">
+      <title>PHX 2008</title>
+      <pubdate>2012-08-01T12:00:01-07:00</pubdate>
+      <description>Captured: 2008</description>
+    </pano>
+  </section>
+
   <section name="mer">
     <title>Mars Exploration Rover</title>
+    <pano
+        resource-base="http://www.ashimagroup.net/~mir/panorama/"
+        src="Greeley_pan_s.jpg" name="greeley-2012"
+        thumb="t_Greeley_pan_s.jpg">
+      <title>MER-B 2012</title>
+      <pubdate>2012-08-27T13:00:00-07:00</pubdate>
+      <description>Captured: 2012</description>
+    </pano>
     <description>
       The <a
       href="http://en.wikipedia.org/wiki/Mars_Exploration_Rover">Mars
@@ -55,38 +88,6 @@
       <title>MPF 1997</title>
       <pubdate>2012-08-01T12:00:00-07:00</pubdate>
       <description>Captured: 1997</description>
-    </pano>
-  </section>
-
-  <section name="phx">
-    <title><term>Phoenix</term> Lander</title>
-    <description>The <a
-    href="http://en.wikipedia.org/wiki/Phoenix_lander"><term>Phoenix</term>
-    Lander</a> descended to the surface of Mars on May 25, 2008.
-    </description>
-    <pano src="PHX.jpg" name="2008-1" thumb="t_PHX.jpg">
-      <title>PHX 2008</title>
-      <pubdate>2012-08-01T12:00:01-07:00</pubdate>
-      <description>Captured: 2008</description>
-    </pano>
-  </section>
-
-  <section name="msl">
-    <title>Mars Science Laboratory</title>
-    <description>The <a
-    href="http://en.wikipedia.org/wiki/Mars_Science_Laboratory">Mars
-    Science Laboratory</a> is a currently ongoing (as of Aug. 28,
-    2012) NASA mission which landed a rover, <term>Curiosity</term>,
-    in <a href="http://en.wikipedia.org/wiki/Gale_(crater)">Gale
-    Crater</a> on Aug. 6, 2012.
-    </description>
-    <pano
-        resource-base="http://www.ashimagroup.net/~mir/panorama/"
-        src="Greeley_pan_s.jpg" name="greeley-2012"
-        thumb="t_Greeley_pan_s.jpg">
-      <title>Greeley 2012</title>
-      <pubdate>2012-08-27T13:00:00-07:00</pubdate>
-      <description>Captured: 2012</description>
     </pano>
   </section>
 </gallery>
