@@ -37,6 +37,10 @@ nav {
 ul {
     list-style:none;
 }
+
+.index ul {
+    list-style:circle;
+}
 	
 .isResizable {
     display:block;
