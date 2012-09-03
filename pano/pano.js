@@ -65,11 +65,10 @@ function renderinit()
   verts.aweSetVertexAttPtr(prog.aweSym["p"]);
   }
 
-//var curW, curH, lat=0, lon=0;
-lat = 0;
-lon = 0;
-prev_lat = null;
-prev_lon = null;
+var el = 0;
+var az = 0;
+var prev_el = null;
+var prev_az = null;
 curW = 0;
 curH = 0;
 wrap = 4;
@@ -79,8 +78,8 @@ function updateElems() {
 
   elemPan.style.width = curW * 2/ zoom + wrap ;
   elemPan.style.height = curH * 2/(zoom *saspect);
-  elemRoot.scrollLeft = lon * (elemPan.offsetWidth - curW-wrap) / (2*pi)+wrap/2;
-  elemRoot.scrollTop  =  (-lat*saspect / pi + 0.5) * (elemPan.offsetHeight - curH) ;
+  elemRoot.scrollLeft = az * (elemPan.offsetWidth - curW-wrap) / (2*pi)+wrap/2;
+  elemRoot.scrollTop  =  (-el*saspect / pi + 0.5) * (elemPan.offsetHeight - curH) ;
   }
 
 function updateCanvasSize() {
@@ -100,27 +99,27 @@ function render() {
   var w = elemRoot.clientWidth;
   var h = elemRoot.clientHeight;
 
-  lon = 2* pi * ( elemRoot.scrollLeft-wrap/2)/(elemPan.offsetWidth - w - wrap);
-  lat = (1/saspect)* -pi * (elemRoot.scrollTop/(elemPan.offsetHeight - h)-0.5);
-  if (lon > 2*pi) {
-    lon -= 2*pi;
+  az = 2* pi * ( elemRoot.scrollLeft-wrap/2)/(elemPan.offsetWidth - w - wrap);
+  el = (1/saspect)* -pi * (elemRoot.scrollTop/(elemPan.offsetHeight - h)-0.5);
+  if (az > 2*pi) {
+    az -= 2*pi;
     updateElems();
     }
 
-  if (lon < 0) {
-    lon += 2*pi;
+  if (az < 0) {
+    az += 2*pi;
     updateElems();
     }
   if (w != curW || h != curH) {
     P.animator.pause();
     setTimeout(resizeNow,200);
     }
-  else if (lat != prev_lat || lon != prev_lon)
+  else if (el != prev_el || az != prev_az)
     {
-    var ca = Math.cos(lat),  sa = Math.sin(lat);
-    var co = Math.cos(lon),  so = Math.sin(lon);
+    var ce = Math.cos(el),  se = Math.sin(el);
+    var ca = Math.cos(az),  sa = Math.sin(az);
   
-    var trans = [ co, -so*sa, so*ca,   0, ca, sa,   so, sa*co, -co*ca ];
+    var trans = [ ca, -sa*se, sa*ce,   0, ce, se,   sa, se*ca, -ca*ce ];
   
     var z_dist = 1.0;
   
@@ -129,9 +128,9 @@ function render() {
     gl.uniformMatrix3fv(prog.aweSym["trans"], false,trans);
     gl.drawArrays(gl.TRIANGLE_STRIP,0,verts.aweNumItems);
 
-    prev_lat = lat; prev_lon = lon;
+    prev_el = el; prev_az = az;
     clearTimeout(panoStopTimer);
-    panoStopTimer = setTimeout(P.onPanoStop,panoStopDelay,lat,lon);
+    panoStopTimer = setTimeout(P.onPanoStop,panoStopDelay,az,el);
     }
   }
 
@@ -162,18 +161,16 @@ function render() {
     saspect = (iw / ih) *0.5 ;
     panoTex.aweFromElem(i);
     zoom = 1 / saspect;
-    prev_lat = prev_lon = null;
+    prev_el = prev_az = null;
     resizeNow();
   };
   P.setZoom = function(_z) {
     zoom = _z;
     updateElems();
   };
-  P.setView = function(lat_,lon_) {
-    lat = lat_;
-    lon = lon_;
+  P.setView = function(az_,el_) {
+    el = el_;
+    az = az_;
   };
-  P.onPanoStop = function(lat,lon) { }
+  P.onPanoStop = function(az,el) { }
 };
-
-
