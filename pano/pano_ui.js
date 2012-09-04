@@ -99,6 +99,15 @@ function showPano(i,subpath) {
       zoom = 1.0;
       apv.setImage(img);
       zoom = tryZoom(panoCoord.z);
+
+      // preload the next pano
+      setTimeout(function () {
+        var link;
+        if (subpath_els[i+1].className.indexOf("pano") != -1) {
+          link = document.getElementById(constructPath(subpath_els[i+1],""));
+          (new Image).src = link.attributes['href'].value;
+        }
+      },0);
     };
     img.onerror = function() {
       spinner.finish();
