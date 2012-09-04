@@ -130,7 +130,7 @@ function render() {
 
     prev_el = el; prev_az = az;
     clearTimeout(panoStopTimer);
-    panoStopTimer = setTimeout(P.onPanoStop,panoStopDelay,az,el);
+    panoStopTimer = setTimeout(P.onPanoStop,panoStopDelay,az,el,zoom);
     }
   }
 
@@ -172,5 +172,5 @@ function render() {
     el = el_;
     az = az_;
   };
-  P.onPanoStop = function(az,el) { }
+  P.onPanoStop = function(az,el,z) { }
 };

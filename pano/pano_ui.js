@@ -56,13 +56,15 @@ function showLoadStatus() {
   }};
 }
 
-apv.onPanoStop = function(az, el) {
+apv.onPanoStop = function(az, el, z) {
+  var zs = "";
+  if (z!=1) zs = "&z="+z;
   if (az!=0 || el!=0)
-    history.replaceState({webgl:1},"","#?az="+az+"&el="+el);
+    history.replaceState({webgl:1},"","#?az="+az+"&el="+el+zs);
 }
 
 function normHash(h) {
-  var hfqp = {az: 0, el: 0};
+  var hfqp = {az: 0, el: 0, z: 1};
   var q = h.substr(2);
   var kvp = q.split("&");
   if ("#?" == h.substr(0,2)) {
@@ -71,7 +73,7 @@ function normHash(h) {
       hfqp[kvp[i][0]] = parseFloat(kvp[i][1]);
     }
 
-    apv.onPanoStop(hfqp.az,hfqp.el);
+    apv.onPanoStop(hfqp.az,hfqp.el,hfqp.z);
   }
   return hfqp;
 }
@@ -88,15 +90,15 @@ function showPano(i,subpath) {
     }
     subpath_els[i].className = "pano panoAct";
 
-    zoom = 1.0;
-
     var spinner = showLoadStatus();
     img.onload = function(e) {
       var panoCoord = normHash(window.location.hash);
       spinner.finish();
       
       apv.setView(panoCoord.az,panoCoord.el);
+      zoom = 1.0;
       apv.setImage(img);
+      zoom = tryZoom(panoCoord.z);
     };
     img.onerror = function() {
       spinner.finish();
