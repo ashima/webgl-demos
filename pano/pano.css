@@ -144,3 +144,11 @@ div#navcat      {
     font-size: 1.5em;
     overflow: hidden;
 }
+
+#caption {
+    position: absolute;
+    bottom: 2em; left: 1em;
+    color: white;
+    opacity: 0.8;
+    font-size: 2em;
+}

@@ -19,7 +19,9 @@
       </head>
       <body onload="main()">
         <article id="pano-container">
-          <div class="isResizable" id="panodiv" width="200" height="200" />
+          <div class="isResizable" id="panodiv" width="200" height="200">
+            <div id="caption" />
+          </div>
           <nav data-base-uri="{@host-base}">
             <ul id="zoom">
               <li id="bZoomIn" class="zoomin" />
@@ -60,7 +62,7 @@
 
   <xsl:template match="pano">
     <div class="pano" data-uri="{@name}">
-      <img src="panos/{@thumb}" title="{title}" />
+      <img src="panos/{@thumb}" title="{title}" class="thumb" />
     </div>
   </xsl:template>
 

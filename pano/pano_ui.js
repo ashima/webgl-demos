@@ -79,6 +79,7 @@ function normHash(h) {
 }
 
 function showPano(i,subpath) {
+  var caption = document.getElementById("caption");
   var link = document.getElementById(subpath);
   var href = link.attributes['href'].value;
   var img = new Image;
@@ -99,6 +100,8 @@ function showPano(i,subpath) {
       zoom = 1.0;
       apv.setImage(img);
       zoom = tryZoom(panoCoord.z);
+
+      caption.innerText = subpath_els[i].querySelector(".thumb").attributes['title'].value;
 
       // preload the next pano
       setTimeout(function () {
