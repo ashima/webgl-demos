@@ -6,6 +6,7 @@
   <xsl:import href="subpath.xsl" />
 
   <xsl:param name="action" select="'create'" />
+  <xsl:param name="host" select="'http://localhost:8000'" />
 
   <xsl:output method="text" indent="no" />
 
@@ -46,7 +47,9 @@
     <xsl:variable name="subpath_qxp">
       <xsl:call-template name="subpath_qxp" />
     </xsl:variable>
-    <xsl:text>xsltproc --param subfeed </xsl:text>
+    <xsl:text>xsltproc --stringparam host </xsl:text>
+    <xsl:value-of select="$host" />
+    <xsl:text> --param subfeed </xsl:text>
     <xsl:value-of select="concat('//',$subpath_qxp)" />
     <xsl:text> ../atom.xsl gallery.xml &gt; </xsl:text>
     <xsl:value-of select="@name" />

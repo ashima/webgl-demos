@@ -22,7 +22,7 @@
           <div class="isResizable" id="panodiv" width="200" height="200">
             <div id="caption" />
           </div>
-          <nav data-base-uri="{@host-base}">
+          <nav class="gallery-nav" data-base-uri="{@host-base}">
             <ul id="zoom">
               <li id="bZoomIn" class="zoomin" />
               <li id="bZoomOut" class="zoomout" />

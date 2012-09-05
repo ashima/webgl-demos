@@ -5,11 +5,13 @@
 
   <xsl:import href="subpath.xsl" />
 
+  <xsl:param name="start" select="'gallery.xhtml'" />
+
   <xsl:template match="/">
     <manifest>
       <xsl:apply-templates select="//pano" />
       <link rel="manifest" type="text/xml" href="../manifest.xml" />
-      <link rel="start" type="text/html" href="gallery.xhtml" />
+      <link rel="start" type="text/html" href="{$start}" />
     </manifest>
   </xsl:template>
 

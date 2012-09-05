@@ -14,6 +14,10 @@ body {
     padding:0;
 }	
 
+article h1 { font-size: 2em; font-weight: bold; margin: 0.5em 0em; }
+article ul { padding-left: 2em; }
+nav h1 { font-size: 1.1em; margin: 0; }
+
 #pano-container {
     height:100%;
     width:100%;
@@ -23,7 +27,7 @@ body {
     display: box;
 }
 	
-nav {
+nav.gallery-nav {
     background-color:#fff;
     background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#bbb));
     background:-moz-linear-gradient(0% 0% 270deg,#FFFFFF, #bbb);
