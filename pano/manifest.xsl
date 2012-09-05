@@ -11,6 +11,8 @@
     <manifest>
       <xsl:apply-templates select="//pano" />
       <xsl:apply-templates select="//section" />
+      <link rel="tag" type="text/html" href="index.html" />
+      <link rel="tag" type="application/atom+xml" href="index.atom" />
       <link rel="manifest" type="text/xml" href="../manifest.xml" />
       <link rel="start" type="text/html" href="{$start}" />
     </manifest>
