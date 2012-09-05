@@ -10,6 +10,7 @@
   <xsl:template match="/">
     <manifest>
       <xsl:apply-templates select="//pano" />
+      <xsl:apply-templates select="//section" />
       <link rel="manifest" type="text/xml" href="../manifest.xml" />
       <link rel="start" type="text/html" href="{$start}" />
     </manifest>
@@ -41,6 +42,15 @@
           data-src="{$base}{@src}" />
     <link rel="thumbnail" type="image/jpeg" href="panos/{@thumb}"
           data-src="{$base}{@thumb}" />
+    <link rel="tag" type="text/html" href="{$subpath}index.html" />
+  </xsl:template>
+
+  <xsl:template match="section">
+    <xsl:variable name="subpath">
+      <xsl:call-template name="subpath" />
+    </xsl:variable>
+    <link rel="tag" type="text/html" href="{$subpath}index.html" />
+    <link rel="tag" type="application/atom+xml" href="{$subpath}index.atom" />
   </xsl:template>
 
 </xsl:stylesheet>
