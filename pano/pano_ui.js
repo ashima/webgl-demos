@@ -25,7 +25,7 @@ function showInfoOverlay(el) {
   for (var i = 0; i < internal_links.length; i++) {
     addEvent(internal_links[i],"click",function(e) {
       e.preventDefault();
-      pushPath(subpath_of_path(this.pathname))();
+      pushPath(subpath_of_path(this.pathname+this.hash))();
     },false);
   }
   div.appendChild(info);
